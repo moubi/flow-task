@@ -1,0 +1,10 @@
+.Column {
+    flex-grow: 1;
+    flex-basis: 0;
+    box-sizing: border-box;
+    border-right: 1px solid #000;
+    
+    &:last-child {
+        border: none;
+    }
+}
