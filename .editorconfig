@@ -1,0 +1,32 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+trim_trailing_whitespace = true
+indent_size = 2
+indent_style = space
+
+[*.ko]
+indent_style = space
+indent_size = 4
+
+[*.i18n]
+indent_style = space
+indent_size = 4
+
+[*.{css,less,scss,ccss}]
+indent_style = space
+indent_size = 4
+
+[*.cjson]
+indent_style = space
+indent_size = 4
+
+[*.feature]
+indent_style = space
+indent_size = 2
+
+[Makefile]
+indent_style = tab
