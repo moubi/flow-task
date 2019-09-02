@@ -11,14 +11,14 @@ export default class Board extends Component {
         {
           id: "d1ea1845-86e2-4c46-976c-8b09ba4786e5",
           tasks: [
-            { id: "e25b1d95-3f86-4d5e-a05d-f6f1cac1c275", text: "Task 1" },
-            { id: "1d2efb70-2e87-4c96-bef6-71524ba01d34", text: "Task 2" }
+            { id: "e25b1d95-3f86-4d5e-a05d-f6f1cac1c275", text: "This is an example task" },
+            { id: "1d2efb70-2e87-4c96-bef6-71524ba01d34", text: "Go to Netto and buy something to eat" }
           ]
         },
         {
           id: "24f4dcf8-b471-488c-a1be-b56ea116e712",
           tasks: [
-            { id: "2a371cb5-25a4-414c-8a6b-71a226831a14", text: "Task 3" }
+            { id: "2a371cb5-25a4-414c-8a6b-71a226831a14", text: "Create a menu for next week" }
           ]
         },
         {
@@ -28,9 +28,9 @@ export default class Board extends Component {
         {
           id: "200c95b8-d2f7-4173-b086-33be8ade92b0",
           tasks: [
-            { id: "7fd3ef5f-27d6-45b4-b1b6-0ad7730cdba7", text: "Task 4" },
-            { id: "73169a85-6b1e-4635-967e-68cc4d0af26d", text: "Task 5" },
-            { id: "b25dd012-c062-4f37-8ce8-378a5e065977", text: "Task 6" }
+            { id: "7fd3ef5f-27d6-45b4-b1b6-0ad7730cdba7", text: "Buy some cake" },
+            { id: "73169a85-6b1e-4635-967e-68cc4d0af26d", text: "Write your homework" },
+            { id: "b25dd012-c062-4f37-8ce8-378a5e065977", text: "Plan your parents stay" }
           ]
         }
       ],
@@ -90,10 +90,10 @@ export default class Board extends Component {
     return (
       <>
         {columns.map(column => (
-          <Column 
-            id={column.id} 
+          <Column
+            id={column.id}
             key={column.id}
-            onDrop={this.handleDrop} 
+            onDrop={this.handleDrop}
             onDragOver={this.handleDragOver}
           >
             {column.tasks.map(task => (
@@ -101,7 +101,7 @@ export default class Board extends Component {
                 id={task.id}
                 key={task.id}
                 text={task.text}
-                onDragStart={() => 
+                onDragStart={() =>
                   this.handleDragStart(task, column.id)
                 }
               />
