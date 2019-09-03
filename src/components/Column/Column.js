@@ -12,6 +12,7 @@ export default class Column extends Component {
         id={id}
         className="Column"
         onDrop={onDrop}
+        onClick={onDrop}
         onDragOver={onDragOver}
       >
         {children}

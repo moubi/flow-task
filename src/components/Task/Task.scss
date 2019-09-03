@@ -24,4 +24,9 @@
         left: 0;
         background: linear-gradient(to right, #04B3BA 0%,#0ABEA2 100%);
     }
+
+    &--dragging {
+        top: -5px;
+        box-shadow: 5px 6px 4px 0 rgba(0, 0, 0, .05);
+    }
 }
