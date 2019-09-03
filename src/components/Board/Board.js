@@ -95,11 +95,12 @@ export default class Board extends Component {
 
     return (
       <div className="Board">
-        {columns.map(column => (
+        {columns.map((column, index) => (
           <Column
             id={column.id}
             key={column.id}
             name={column.name}
+            shouldHaveAddIcon={index === 0}
             onDrop={this.handleDrop}
             onDragOver={this.handleDragOver}
           >

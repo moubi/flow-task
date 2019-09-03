@@ -11,10 +11,11 @@
     font-family: monospace;
     font-size: 16px;
     line-height: 24px;
-    color: #222;
+    color: #444;
     text-align: center;
     overflow: hidden;
 
+    // Top gradient border
     &:before {
         content: '';
         position: absolute;
@@ -22,7 +23,7 @@
         height: 5px;
         top: 0;
         left: 0;
-        background: linear-gradient(to right, #04B3BA 0%,#0ABEA2 100%);
+        background: linear-gradient(to right, #04b3ba 0%,#0abea2 100%);
     }
 
     &--dragging {

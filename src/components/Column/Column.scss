@@ -11,13 +11,33 @@
 
     @media (max-width: 1023px) {
         flex-shrink: 0;
-        flex-basis: 300px;
+        // iPhone 5SE screen width
+        flex-basis: 320px;
     }
 
-    h2 {
-        font-size: 18px;
-        line-height: 26px;
-        text-transform: uppercase;
-        color: #444;
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 26px;
+        margin-top: 10px;
+
+        h2 {
+            display: inline-block;
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #444;
+        }
+
+        .plus {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background: url("../../assets/plus.svg");
+            background-repeat: no-repeat;
+            background-size: 16px 16px;
+            background-position: 50% 50%;
+            cursor: pointer;
+        }
     }
 }
