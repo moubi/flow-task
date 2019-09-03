@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Column from "../Column/Column";
 import Task from "../Task/Task";
 
+import "./Board.scss";
+
 export default class Board extends Component {
   constructor(props) {
     super(props);
@@ -88,7 +90,7 @@ export default class Board extends Component {
     const { columns } = this.state;
 
     return (
-      <>
+      <div className="Board">
         {columns.map(column => (
           <Column
             id={column.id}
@@ -108,7 +110,7 @@ export default class Board extends Component {
             ))}
           </Column>
         ))}
-      </>
+      </div>
     );
   }
 }

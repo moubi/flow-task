@@ -7,4 +7,9 @@
     &:last-child {
         border: none;
     }
+
+    @media (max-width: 1023px) {
+        flex-shrink: 0;
+        flex-basis: 300px;
+    }
 }

@@ -8,10 +8,10 @@ export default class Column extends Component {
     const { id, children, onDrop, onDragOver } = this.props;
 
     return (
-      <div 
-        id={id} 
-        className="Column" 
-        onDrop={onDrop} 
+      <div
+        id={id}
+        className="Column"
+        onDrop={onDrop}
         onDragOver={onDragOver}
       >
         {children}

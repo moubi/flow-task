@@ -8,10 +8,10 @@ export default class Task extends Component {
     const { id, text, onDragStart } = this.props;
 
     return (
-      <div 
-        id={id} 
-        className="Task" 
-        draggable 
+      <div
+        id={id}
+        className="Task"
+        draggable
         onDragStart={() => onDragStart()}
       >
         {text}
