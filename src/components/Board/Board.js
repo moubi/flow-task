@@ -99,6 +99,7 @@ export default class Board extends Component {
           <Column
             id={column.id}
             key={column.id}
+            name={column.name}
             onDrop={this.handleDrop}
             onDragOver={this.handleDragOver}
           >

@@ -5,16 +5,18 @@ import "./Column.scss";
 
 export default class Column extends Component {
   render() {
-    const { id, children, onDrop, onDragOver } = this.props;
+    const { id, name, children, onDrop, onDragOver } = this.props;
 
     return (
       <div
         id={id}
+        name={name}
         className="Column"
         onDrop={onDrop}
         onClick={onDrop}
         onDragOver={onDragOver}
       >
+        <h2>{name}</h2>
         {children}
       </div>
     );
@@ -23,6 +25,7 @@ export default class Column extends Component {
 
 Column.propTypes = {
   id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   onDrop: PropTypes.func.isRequired,
   onDragOver: PropTypes.func.isRequired
 }
