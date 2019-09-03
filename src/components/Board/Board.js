@@ -58,6 +58,10 @@ export default class Board extends Component {
 
   handleDrop(e) {
     const draggedTask = this.state.draggedData.task;
+
+    if (e.target === null || !draggedTask) {
+      return;
+    }
     const dropColumnId = e.target.id;
 
     const columns = this.state.columns.map(column => {
