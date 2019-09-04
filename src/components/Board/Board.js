@@ -1,8 +1,17 @@
 import React, { Component } from "react";
+import uuid from "uuid/v4";
+
 import Column from "../Column/Column";
 import Task from "../Task/Task";
 
 import "./Board.scss";
+
+const FIRST_COLUMN = 0;
+
+const getNewTask = () => ({
+  id: uuid(),
+  value: ""
+});
 
 export default class Board extends Component {
   constructor(props) {
@@ -60,6 +69,7 @@ export default class Board extends Component {
     this.handleDragOver = this.handleDragOver.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
     this.handleTaskTextChange = this.handleTaskTextChange.bind(this);
+    this.handleTaskAddition = this.handleTaskAddition.bind(this);
   }
 
   handleDragStart(task, sourceColumnId) {
@@ -107,6 +117,15 @@ export default class Board extends Component {
     this.setState({ columns });
   }
 
+  handleTaskAddition() {
+    const { columns } = this.state;
+    // Add the new task to first position
+    columns[FIRST_COLUMN].tasks = [getNewTask()].concat(
+      columns[FIRST_COLUMN].tasks
+    );
+    this.setState({ columns });
+  }
+
   render() {
     const { columns, draggedData } = this.state;
     const draggedTaskId = draggedData.task ? draggedData.task.id : null;
@@ -118,7 +137,9 @@ export default class Board extends Component {
             id={column.id}
             key={column.id}
             name={column.name}
-            shouldHaveAddIcon={columnIndex === 0}
+            onAdd={
+              columnIndex === FIRST_COLUMN ? this.handleTaskAddition : null
+            }
             onDrop={this.handleDrop}
             onDragOver={this.handleDragOver}
           >
