@@ -8,10 +8,6 @@ trim_trailing_whitespace = true
 indent_size = 2
 indent_style = space
 
-[*.ko]
-indent_style = space
-indent_size = 4
-
 [*.i18n]
 indent_style = space
 indent_size = 4

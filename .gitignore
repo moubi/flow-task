@@ -78,6 +78,9 @@ typings/
 # public
 /public
 
+# VS code config
+.vscode
+
 # misc
 .DS_Store
 .env.local

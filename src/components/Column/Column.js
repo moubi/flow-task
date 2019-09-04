@@ -5,7 +5,14 @@ import "./Column.scss";
 
 export default class Column extends Component {
   render() {
-    const { id, name, children, onDrop, onDragOver, shouldHaveAddIcon = false } = this.props;
+    const {
+      id,
+      name,
+      children,
+      onDrop,
+      onDragOver,
+      shouldHaveAddIcon = false
+    } = this.props;
 
     return (
       <div
@@ -32,4 +39,4 @@ Column.propTypes = {
   shouldHaveAddIcon: PropTypes.bool,
   onDrop: PropTypes.func.isRequired,
   onDragOver: PropTypes.func.isRequired
-}
+};
