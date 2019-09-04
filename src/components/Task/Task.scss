@@ -13,7 +13,9 @@
     line-height: 24px;
     color: #444;
     text-align: center;
+    outline: none;
     overflow: hidden;
+    user-select: text;
 
     // Top gradient border
     &:before {
