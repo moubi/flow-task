@@ -59,6 +59,7 @@ export default class Board extends Component {
     this.handleDragStart = this.handleDragStart.bind(this);
     this.handleDragOver = this.handleDragOver.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
+    this.handleTaskTextChange = this.handleTaskTextChange.bind(this);
   }
 
   handleDragStart(task, sourceColumnId) {
@@ -100,26 +101,35 @@ export default class Board extends Component {
     this.setState({ columns, draggedData: {} });
   }
 
+  handleTaskTextChange(taskIndex, columnIndex, value) {
+    const { columns } = this.state;
+    columns[columnIndex].tasks[taskIndex].text = value;
+    this.setState({ columns });
+  }
+
   render() {
     const { columns, draggedData } = this.state;
     const draggedTaskId = draggedData.task ? draggedData.task.id : null;
 
     return (
       <div className="Board">
-        {columns.map((column, index) => (
+        {columns.map((column, columnIndex) => (
           <Column
             id={column.id}
             key={column.id}
             name={column.name}
-            shouldHaveAddIcon={index === 0}
+            shouldHaveAddIcon={columnIndex === 0}
             onDrop={this.handleDrop}
             onDragOver={this.handleDragOver}
           >
-            {column.tasks.map(task => (
+            {column.tasks.map((task, taskIndex) => (
               <Task
                 id={task.id}
                 key={task.id}
                 isDragging={draggedTaskId === task.id}
+                onChange={value =>
+                  this.handleTaskTextChange(taskIndex, columnIndex, value)
+                }
                 onDragStart={() => this.handleDragStart(task, column.id)}
               >
                 {task.text}

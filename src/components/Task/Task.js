@@ -14,6 +14,7 @@ export default class Task extends Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleButtonPress = this.handleButtonPress.bind(this);
     this.handleButtonRelease = this.handleButtonRelease.bind(this);
+    this.handleNewInput = this.handleNewInput.bind(this);
   }
 
   componentDidMount() {
@@ -51,6 +52,10 @@ export default class Task extends Component {
     }
   }
 
+  handleNewInput(e) {
+    this.props.onChange(e.target.innerHTML);
+  }
+
   getRef(el) {
     this.el = el;
   }
@@ -67,6 +72,7 @@ export default class Task extends Component {
         autoFocus
         onDragStart={onDragStart}
         onClick={this.handleBlur}
+        onInput={this.handleNewInput}
         // TODO: split touch and desktop
         onTouchStart={this.handleButtonPress}
         onTouchEnd={this.handleButtonRelease}
@@ -84,5 +90,6 @@ Task.propTypes = {
   id: PropTypes.string.isRequired,
   children: PropTypes.node,
   isDragging: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
   onDragStart: PropTypes.func.isRequired
 };
