@@ -44,6 +44,8 @@ export default class Task extends Component {
 
   handleBlur(e) {
     // Stop event so that it doesn't go to the Column
+    // We may need to allow it to propagate in order to 
+    // change possition within column
     e.stopPropagation();
     if (this.props.isDragging) {
       // clicking on contentEditable element focuses it automatically,

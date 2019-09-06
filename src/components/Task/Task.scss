@@ -1,6 +1,6 @@
 .Task {
     position: relative;
-    min-height: 100px;
+    min-height: 70px;
     margin: 20px 0;
     padding: 15px 10px 10px 10px;
     background-color: #fff;
@@ -25,7 +25,7 @@
         height: 5px;
         top: 0;
         left: 0;
-        background: linear-gradient(to right, #04b3ba 0%,#0abea2 100%);
+        background: linear-gradient(to right, #04b3ba 0%,#f1f1f1 100%);
     }
 
     &--dragging {
