@@ -18,8 +18,8 @@ export default class Board extends Component {
     super(props);
 
     this.state = {
-      columns: [
-        {
+      columns: {
+        "d1ea1845-86e2-4c46-976c-8b09ba4786e5": {
           id: "d1ea1845-86e2-4c46-976c-8b09ba4786e5",
           name: "To do",
           tasks: [
@@ -33,7 +33,7 @@ export default class Board extends Component {
             }
           ]
         },
-        {
+        "24f4dcf8-b471-488c-a1be-b56ea116e712": {
           id: "24f4dcf8-b471-488c-a1be-b56ea116e712",
           name: "Doing",
           tasks: [
@@ -43,7 +43,7 @@ export default class Board extends Component {
             }
           ]
         },
-        {
+        "200c95b8-d2f7-4173-b086-33be8ade92b0": {
           id: "200c95b8-d2f7-4173-b086-33be8ade92b0",
           name: "Done",
           tasks: [
@@ -61,7 +61,7 @@ export default class Board extends Component {
             }
           ]
         }
-      ],
+      },
       draggedData: {}
     };
 
@@ -86,29 +86,35 @@ export default class Board extends Component {
   }
 
   handleDrop(e) {
-    const draggedTask = this.state.draggedData.task;
+    const { task: draggedTask, sourceColumnId } = this.state.draggedData;
 
     if (e.target === null || !draggedTask) {
       return;
     }
     const dropColumnId = e.target.id;
 
-    const columns = this.state.columns.map(column => {
-      // TODO: store information for the source column
-      if (column.id === dropColumnId) {
-        return {
-          ...column,
-          tasks: [...new Set([...column.tasks, draggedTask])]
-        };
-      } else {
-        return {
-          ...column,
-          tasks: column.tasks.filter(task => task.id !== draggedTask.id)
-        };
+    const { columns } = this.state;
+    const dropColumn = columns[dropColumnId];
+    const sourceColumn = columns[sourceColumnId];
+
+    // TODO: Handle the case when we should reorder in the same column
+    if (dropColumnId !== sourceColumnId) {
+      dropColumn.tasks = [...new Set([...dropColumn.tasks, draggedTask])];
+      sourceColumn.tasks = sourceColumn.tasks.filter(task => task.id !== draggedTask.id);
+    }
+
+    this.setState({
+      draggedData: {},
+      columns: {
+          ...columns,
+          [dropColumnId]: {
+            ...dropColumn
+          },
+          [sourceColumnId]: {
+            ...sourceColumn
+          }
       }
     });
-
-    this.setState({ columns, draggedData: {} });
   }
 
   handleTaskTextChange(taskIndex, columnIndex, value) {
@@ -132,7 +138,7 @@ export default class Board extends Component {
 
     return (
       <div className="Board">
-        {columns.map((column, columnIndex) => (
+        {Object.values(columns).map((column, columnIndex) => (
           <Column
             id={column.id}
             key={column.id}
