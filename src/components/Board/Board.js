@@ -100,19 +100,21 @@ export default class Board extends Component {
     // TODO: Handle the case when we should reorder in the same column
     if (dropColumnId !== sourceColumnId) {
       dropColumn.tasks = [...new Set([...dropColumn.tasks, draggedTask])];
-      sourceColumn.tasks = sourceColumn.tasks.filter(task => task.id !== draggedTask.id);
+      sourceColumn.tasks = sourceColumn.tasks.filter(
+        task => task.id !== draggedTask.id
+      );
     }
 
     this.setState({
       draggedData: {},
       columns: {
-          ...columns,
-          [dropColumnId]: {
-            ...dropColumn
-          },
-          [sourceColumnId]: {
-            ...sourceColumn
-          }
+        ...columns,
+        [dropColumnId]: {
+          ...dropColumn
+        },
+        [sourceColumnId]: {
+          ...sourceColumn
+        }
       }
     });
   }
@@ -143,6 +145,7 @@ export default class Board extends Component {
             id={column.id}
             key={column.id}
             name={column.name}
+            count={column.tasks.length}
             onAdd={
               columnIndex === FIRST_COLUMN ? this.handleTaskAddition : null
             }

@@ -5,7 +5,7 @@ import "./Column.scss";
 
 export default class Column extends Component {
   render() {
-    const { id, name, children, onDrop, onDragOver, onAdd } = this.props;
+    const { id, name, count, children, onDrop, onDragOver, onAdd } = this.props;
 
     return (
       <div
@@ -17,7 +17,9 @@ export default class Column extends Component {
         onDragOver={onDragOver}
       >
         <header>
-          <h2>{name}</h2>
+          <h2>
+            {name} ({count})
+          </h2>
           {onAdd && <i className="plus" onClick={onAdd} />}
         </header>
         {children}
@@ -29,6 +31,7 @@ export default class Column extends Component {
 Column.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  count: PropTypes.string.isRequired,
   shouldHaveAddIcon: PropTypes.bool,
   onDrop: PropTypes.func.isRequired,
   onDragOver: PropTypes.func.isRequired,
