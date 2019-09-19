@@ -31,7 +31,7 @@ export default class Column extends Component {
 Column.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  count: PropTypes.string.isRequired,
+  count: PropTypes.number.isRequired,
   shouldHaveAddIcon: PropTypes.bool,
   onDrop: PropTypes.func.isRequired,
   onDragOver: PropTypes.func.isRequired,
