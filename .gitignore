@@ -81,6 +81,9 @@ typings/
 # VS code config
 .vscode
 
+# Our simple db file
+db.json
+
 # misc
 .DS_Store
 .env.local
