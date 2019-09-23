@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import uuid from "uuid/v4";
 import PropTypes from "prop-types";
+import { saveBoardData } from "../../store/actions";
 
 import Column from "../Column/Column";
 import Task from "../Task/Task";
@@ -63,17 +64,20 @@ export default class Board extends Component {
       );
     }
 
-    this.setState({
-      draggedData: {},
-      columns: {
-        ...columns,
-        [dropColumnId]: {
-          ...dropColumn
-        },
-        [sourceColumnId]: {
-          ...sourceColumn
-        }
+    const reorderedColumns = {
+      ...columns,
+      [dropColumnId]: {
+        ...dropColumn
+      },
+      [sourceColumnId]: {
+        ...sourceColumn
       }
+    };
+    saveBoardData({ columns: reorderedColumns }).then(data => {
+      this.setState({
+        draggedData: {},
+        columns: reorderedColumns
+      });
     });
   }
 

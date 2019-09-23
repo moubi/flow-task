@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { loadBoardData } from "./store/actions";
 import Board from "./components/Board/Board";
 
 class App extends Component {
@@ -12,11 +12,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("/kanban-board")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ data });
-      });
+    loadBoardData().then(data => {
+      this.setState({ data });
+    });
   }
 
   render() {
