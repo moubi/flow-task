@@ -73,10 +73,10 @@ export default class Board extends Component {
         ...sourceColumn
       }
     };
-    saveBoardData({ columns: reorderedColumns }).then(data => {
+    saveBoardData({ columns: reorderedColumns }).then(({ columns }) => {
       this.setState({
         draggedData: {},
-        columns: reorderedColumns
+        columns
       });
     });
   }
