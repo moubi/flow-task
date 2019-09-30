@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import uuid from "uuid/v4";
 import PropTypes from "prop-types";
+import { debounce } from "lodash";
 import { saveBoardData } from "../../store/actions";
 
 import Column from "../Column/Column";
@@ -29,6 +30,7 @@ export default class Board extends Component {
     this.handleDrop = this.handleDrop.bind(this);
     this.handleTaskTextChange = this.handleTaskTextChange.bind(this);
     this.handleTaskAddition = this.handleTaskAddition.bind(this);
+    this.saveBoardDataWithDelay = debounce(saveBoardData, 500);
   }
 
   handleDragStart(task, sourceColumnId) {
@@ -81,10 +83,12 @@ export default class Board extends Component {
     });
   }
 
-  handleTaskTextChange(taskIndex, columnIndex, value) {
+  handleTaskTextChange(taskIndex, columnId, value) {
     const { columns } = this.state;
-    columns[columnIndex].tasks[taskIndex].text = value;
-    this.setState({ columns });
+    columns[columnId].tasks[taskIndex].text = value;
+    this.setState({ columns }, () => {
+      this.saveBoardDataWithDelay({ columns });
+    });
   }
 
   handleTaskAddition() {
@@ -120,7 +124,7 @@ export default class Board extends Component {
                 key={task.id}
                 isDragging={draggedTaskId === task.id}
                 onChange={value =>
-                  this.handleTaskTextChange(taskIndex, columnIndex, value)
+                  this.handleTaskTextChange(taskIndex, column.id, value)
                 }
                 onDragStart={() => this.handleDragStart(task, column.id)}
               >
