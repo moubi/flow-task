@@ -9,7 +9,8 @@ import Task from "../Task/Task";
 
 import "./Board.scss";
 
-const FIRST_COLUMN = 0;
+// TODO: Figure out a better way
+const FIRST_COLUMN_ID = "d1ea1845-86e2-4c46-976c-8b09ba4786e5";
 
 const getNewTask = () => ({
   id: uuid(),
@@ -31,14 +32,6 @@ export default class Board extends Component {
     this.handleTaskTextChange = this.handleTaskTextChange.bind(this);
     this.handleTaskAddition = this.handleTaskAddition.bind(this);
     this.saveBoardDataWithDelay = debounce(saveBoardData, 500);
-  }
-
-  // TODO: Carefuly rething this one
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.data !== this.props.data) {
-      return true;
-    }
-    return false;
   }
 
   handleDragStart(task, sourceColumnId) {
@@ -106,10 +99,12 @@ export default class Board extends Component {
   handleTaskAddition() {
     const { columns } = this.state;
     // Add the new task to first position
-    columns[FIRST_COLUMN].tasks = [getNewTask()].concat(
-      columns[FIRST_COLUMN].tasks
+    columns[FIRST_COLUMN_ID].tasks = [getNewTask()].concat(
+      columns[FIRST_COLUMN_ID].tasks
     );
-    this.setState({ columns });
+    this.setState({ columns }, () => {
+      saveBoardData({ columns });
+    });
   }
 
   render() {
@@ -118,14 +113,14 @@ export default class Board extends Component {
 
     return (
       <div className="Board">
-        {Object.values(columns).map((column, columnIndex) => (
+        {Object.values(columns).map(column => (
           <Column
             id={column.id}
             key={column.id}
             name={column.name}
             count={column.tasks.length}
             onAdd={
-              columnIndex === FIRST_COLUMN ? this.handleTaskAddition : null
+              column.id === FIRST_COLUMN_ID ? this.handleTaskAddition : null
             }
             onDrop={this.handleDrop}
             onDragOver={this.handleDragOver}
