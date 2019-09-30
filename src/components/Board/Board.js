@@ -33,6 +33,14 @@ export default class Board extends Component {
     this.saveBoardDataWithDelay = debounce(saveBoardData, 500);
   }
 
+  // TODO: Carefuly rething this one
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.data !== this.props.data) {
+      return true;
+    }
+    return false;
+  }
+
   handleDragStart(task, sourceColumnId) {
     this.setState({
       draggedData: {
@@ -75,12 +83,16 @@ export default class Board extends Component {
         ...sourceColumn
       }
     };
-    saveBoardData({ columns: reorderedColumns }).then(({ columns }) => {
-      this.setState({
+
+    this.setState(
+      {
         draggedData: {},
-        columns
-      });
-    });
+        columns: reorderedColumns
+      },
+      () => {
+        saveBoardData({ columns: reorderedColumns });
+      }
+    );
   }
 
   handleTaskTextChange(taskIndex, columnId, value) {
