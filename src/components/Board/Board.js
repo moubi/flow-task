@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import uuid from "uuid/v4";
+import PropTypes from "prop-types";
+import { debounce } from "lodash";
+import { saveBoardData } from "../../store/actions";
 
 import Column from "../Column/Column";
 import Task from "../Task/Task";
 
 import "./Board.scss";
 
-const FIRST_COLUMN = 0;
+// TODO: Figure out a better way
+const FIRST_COLUMN_ID = "d1ea1845-86e2-4c46-976c-8b09ba4786e5";
 
 const getNewTask = () => ({
   id: uuid(),
@@ -18,50 +22,7 @@ export default class Board extends Component {
     super(props);
 
     this.state = {
-      columns: {
-        "d1ea1845-86e2-4c46-976c-8b09ba4786e5": {
-          id: "d1ea1845-86e2-4c46-976c-8b09ba4786e5",
-          name: "To do",
-          tasks: [
-            {
-              id: "e25b1d95-3f86-4d5e-a05d-f6f1cac1c275",
-              text: "This is an example task"
-            },
-            {
-              id: "1d2efb70-2e87-4c96-bef6-71524ba01d34",
-              text: "Go to Netto and buy something to eat"
-            }
-          ]
-        },
-        "24f4dcf8-b471-488c-a1be-b56ea116e712": {
-          id: "24f4dcf8-b471-488c-a1be-b56ea116e712",
-          name: "Doing",
-          tasks: [
-            {
-              id: "2a371cb5-25a4-414c-8a6b-71a226831a14",
-              text: "Create a menu for next week"
-            }
-          ]
-        },
-        "200c95b8-d2f7-4173-b086-33be8ade92b0": {
-          id: "200c95b8-d2f7-4173-b086-33be8ade92b0",
-          name: "Done",
-          tasks: [
-            {
-              id: "7fd3ef5f-27d6-45b4-b1b6-0ad7730cdba7",
-              text: "Buy some cake"
-            },
-            {
-              id: "73169a85-6b1e-4635-967e-68cc4d0af26d",
-              text: "Write your homework"
-            },
-            {
-              id: "b25dd012-c062-4f37-8ce8-378a5e065977",
-              text: "Plan your parents stay"
-            }
-          ]
-        }
-      },
+      columns: props.data.columns,
       draggedData: {}
     };
 
@@ -70,6 +31,7 @@ export default class Board extends Component {
     this.handleDrop = this.handleDrop.bind(this);
     this.handleTaskTextChange = this.handleTaskTextChange.bind(this);
     this.handleTaskAddition = this.handleTaskAddition.bind(this);
+    this.saveBoardDataWithDelay = debounce(saveBoardData, 500);
   }
 
   handleDragStart(task, sourceColumnId) {
@@ -105,33 +67,44 @@ export default class Board extends Component {
       );
     }
 
-    this.setState({
-      draggedData: {},
-      columns: {
-        ...columns,
-        [dropColumnId]: {
-          ...dropColumn
-        },
-        [sourceColumnId]: {
-          ...sourceColumn
-        }
+    const reorderedColumns = {
+      ...columns,
+      [dropColumnId]: {
+        ...dropColumn
+      },
+      [sourceColumnId]: {
+        ...sourceColumn
       }
-    });
+    };
+
+    this.setState(
+      {
+        draggedData: {},
+        columns: reorderedColumns
+      },
+      () => {
+        saveBoardData({ columns: reorderedColumns });
+      }
+    );
   }
 
-  handleTaskTextChange(taskIndex, columnIndex, value) {
+  handleTaskTextChange(taskIndex, columnId, value) {
     const { columns } = this.state;
-    columns[columnIndex].tasks[taskIndex].text = value;
-    this.setState({ columns });
+    columns[columnId].tasks[taskIndex].text = value;
+    this.setState({ columns }, () => {
+      this.saveBoardDataWithDelay({ columns });
+    });
   }
 
   handleTaskAddition() {
     const { columns } = this.state;
     // Add the new task to first position
-    columns[FIRST_COLUMN].tasks = [getNewTask()].concat(
-      columns[FIRST_COLUMN].tasks
+    columns[FIRST_COLUMN_ID].tasks = [getNewTask()].concat(
+      columns[FIRST_COLUMN_ID].tasks
     );
-    this.setState({ columns });
+    this.setState({ columns }, () => {
+      saveBoardData({ columns });
+    });
   }
 
   render() {
@@ -140,14 +113,14 @@ export default class Board extends Component {
 
     return (
       <div className="Board">
-        {Object.values(columns).map((column, columnIndex) => (
+        {Object.values(columns).map(column => (
           <Column
             id={column.id}
             key={column.id}
             name={column.name}
             count={column.tasks.length}
             onAdd={
-              columnIndex === FIRST_COLUMN ? this.handleTaskAddition : null
+              column.id === FIRST_COLUMN_ID ? this.handleTaskAddition : null
             }
             onDrop={this.handleDrop}
             onDragOver={this.handleDragOver}
@@ -158,7 +131,7 @@ export default class Board extends Component {
                 key={task.id}
                 isDragging={draggedTaskId === task.id}
                 onChange={value =>
-                  this.handleTaskTextChange(taskIndex, columnIndex, value)
+                  this.handleTaskTextChange(taskIndex, column.id, value)
                 }
                 onDragStart={() => this.handleDragStart(task, column.id)}
               >
@@ -171,3 +144,7 @@ export default class Board extends Component {
     );
   }
 }
+
+Board.propTypes = {
+  data: PropTypes.object.isRequired
+};
