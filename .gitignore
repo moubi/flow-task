@@ -82,7 +82,7 @@ typings/
 .vscode
 
 # Our simple db file
-db.json
+/db.json
 
 # misc
 .DS_Store
