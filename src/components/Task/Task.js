@@ -15,6 +15,7 @@ export default class Task extends Component {
     this.handleButtonPress = this.handleButtonPress.bind(this);
     this.handleButtonRelease = this.handleButtonRelease.bind(this);
     this.handleNewInput = this.handleNewInput.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -44,7 +45,7 @@ export default class Task extends Component {
 
   handleBlur(e) {
     // Stop event so that it doesn't go to the Column
-    // We may need to allow it to propagate in order to 
+    // We may need to allow it to propagate in order to
     // change possition within column
     e.stopPropagation();
     if (this.props.isDragging) {
@@ -56,6 +57,11 @@ export default class Task extends Component {
 
   handleNewInput(e) {
     this.props.onChange(e.target.innerHTML);
+  }
+
+  handleDelete(e) {
+    e.stopPropagation();
+    this.props.onDelete();
   }
 
   getRef(el) {
@@ -83,6 +89,7 @@ export default class Task extends Component {
         onMouseLeave={this.handleButtonRelease}
       >
         {children}
+        <i className="Task-delete" onClick={this.handleDelete} />
       </div>
     );
   }
@@ -93,5 +100,6 @@ Task.propTypes = {
   children: PropTypes.node,
   isDragging: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   onDragStart: PropTypes.func.isRequired
 };

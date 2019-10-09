@@ -22,4 +22,26 @@
         background-color: #FFDE33;
         box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.2);
     }
+
+    &-delete {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 24px;
+        height: 24px;
+        color: #444;
+        cursor: pointer;
+
+        &:before {
+            content: "x";
+            font-style: normal;
+        }
+    }
+
+    &:hover {
+        .Task-delete {
+            display: block;
+        }
+    }
 }

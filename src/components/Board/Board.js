@@ -96,6 +96,15 @@ export default class Board extends Component {
     });
   }
 
+  handleTaskDeletion(taskIndex, columnId) {
+    const { columns } = this.state;
+    columns[columnId].tasks.splice(taskIndex, 1);
+
+    this.setState({ columns }, () => {
+      this.saveBoardDataWithDelay({ columns });
+    });
+  }
+
   handleTaskAddition() {
     const { columns } = this.state;
     // Add the new task to first position
@@ -133,6 +142,7 @@ export default class Board extends Component {
                 onChange={value =>
                   this.handleTaskTextChange(taskIndex, column.id, value)
                 }
+                onDelete={() => this.handleTaskDeletion(taskIndex, column.id)}
                 onDragStart={() => this.handleDragStart(task, column.id)}
               >
                 {task.text}
