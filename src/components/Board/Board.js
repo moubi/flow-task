@@ -156,5 +156,6 @@ export default class Board extends Component {
 }
 
 Board.propTypes = {
+  isTouch: PropTypes.bool.isRequired,
   data: PropTypes.object.isRequired
 };

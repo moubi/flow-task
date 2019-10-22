@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { loadBoardData } from "./store/actions";
+import { isTouch } from "./store/selectors";
 import Board from "./components/Board/Board";
 
 class App extends Component {
@@ -22,8 +25,14 @@ class App extends Component {
     if (!data) {
       return "Loading...";
     }
-    return <Board data={data} />;
+    return <Board data={data} isTouch={this.props.isTouch} />;
   }
 }
 
-export default App;
+App.propTypes = {
+  isTouch: PropTypes.bool.isRequired
+};
+
+export default connect(store => ({
+  isTouch: isTouch(store)
+}))(App);

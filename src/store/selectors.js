@@ -1,0 +1,1 @@
+export { isTouch } from "./ui";
