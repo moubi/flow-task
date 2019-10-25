@@ -89,7 +89,9 @@ export default class Task extends Component {
         onMouseLeave={this.handleButtonRelease}
       >
         {children}
-        <i className="Task-delete" onClick={this.handleDelete} />
+        <div className="Task-options">
+          <span className="Task-options-delete" onClick={this.handleDelete} />
+        </div>
       </div>
     );
   }

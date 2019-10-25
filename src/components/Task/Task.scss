@@ -39,9 +39,38 @@
         }
     }
 
+    &-options {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        height: 100%;
+        width: 100%;
+        transform: translateX(100%);
+        transition: transform 0.2s ease-in;
+
+        &-delete {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 100%;
+            background-color: #f00;
+            cursor: pointer;
+
+            &:after {
+                // TODO: Replace with an icon
+                content: "Delete";
+                font-size: 14px;
+                color: #fff;
+            }
+        }
+    }
+
     &:hover {
-        .Task-delete {
-            display: block;
+        .Task-options {
+            transform: translateX(calc(100% - 70px));
+            transition: transform 0.2s ease-out;
         }
     }
 }
