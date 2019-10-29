@@ -139,14 +139,13 @@ export default class Board extends Component {
                 id={task.id}
                 key={task.id}
                 isDragging={draggedTaskId === task.id}
+                text={task.text}
                 onChange={value =>
                   this.handleTaskTextChange(taskIndex, column.id, value)
                 }
                 onDelete={() => this.handleTaskDeletion(taskIndex, column.id)}
                 onDragStart={() => this.handleDragStart(task, column.id)}
-              >
-                {task.text}
-              </Task>
+              />
             ))}
           </Column>
         ))}

@@ -9,25 +9,36 @@ export default class Task extends Component {
     super(props);
 
     this.el = null;
-    this.buttonPressTimer = null;
-    this.getRef = this.getRef.bind(this);
+    this.state = {
+      text: props.text
+    };
     this.handleDragStart = this.handleDragStart.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
-    this.handleNewInput = this.handleNewInput.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  componentDidMount() {
-    // We need a way to avoid contentEditable warnings from react
-    // One way to do so is to add the attribute after mounting
-    if (this.el) {
-      this.el.setAttribute("contentEditable", true);
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.text !== this.state.text) {
+      return true;
     }
+    return false;
   }
 
   handleFocus(e) {
+    // Prevent click to bubble up to the Column and trigger drag
     e.stopPropagation();
+    this.el.setAttribute("contentEditable", true);
     this.el && this.el.focus();
+  }
+
+  handleBlur(e) {
+    // Remove contentEditable on blur, so that it's not possible
+    // to edit when click on the element.
+    // Click triggers drag, so we want to avoid it
+    // TODO: when proper dnd is implemented, this may not be needed
+    this.el.setAttribute("contentEditable", false);
   }
 
   handleDragStart(e) {
@@ -38,8 +49,11 @@ export default class Task extends Component {
     this.props.onDragStart();
   }
 
-  handleNewInput(e) {
-    this.props.onChange(e.target.innerHTML);
+  handleTextChange(e) {
+    const text = e.target.innerText;
+    this.setState({ text }, () => {
+      this.props.onChange(text);
+    });
   }
 
   handleDelete(e) {
@@ -47,12 +61,9 @@ export default class Task extends Component {
     this.props.onDelete();
   }
 
-  getRef(el) {
-    this.el = el;
-  }
-
   render() {
-    const { id, children, onDragStart, isDragging = false } = this.props;
+    const { id, onDragStart, isDragging = false } = this.props;
+    const { text } = this.state;
 
     return (
       <div
@@ -64,10 +75,13 @@ export default class Task extends Component {
       >
         <div
           className="Task-text"
-          ref={this.getRef}
-          onInput={this.handleNewInput}
+          ref={el => {
+            this.el = el;
+          }}
+          onInput={this.handleTextChange}
+          onBlur={this.handleBlur}
         >
-          {children}
+          {text}
         </div>
         <div className="Task-options">
           <span className="Task-options-delete" onClick={this.handleDelete} />
@@ -80,7 +94,7 @@ export default class Task extends Component {
 
 Task.propTypes = {
   id: PropTypes.string.isRequired,
-  children: PropTypes.node,
+  text: PropTypes.string,
   isDragging: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
