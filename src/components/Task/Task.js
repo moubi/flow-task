@@ -11,9 +11,8 @@ export default class Task extends Component {
     this.el = null;
     this.buttonPressTimer = null;
     this.getRef = this.getRef.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleButtonPress = this.handleButtonPress.bind(this);
-    this.handleButtonRelease = this.handleButtonRelease.bind(this);
+    this.handleDragStart = this.handleDragStart.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
     this.handleNewInput = this.handleNewInput.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
@@ -26,33 +25,17 @@ export default class Task extends Component {
     }
   }
 
-  handleButtonPress(e) {
+  handleFocus(e) {
     e.stopPropagation();
-
-    this.buttonPressTimer = setTimeout(() => {
-      const { isDragging, onDragStart } = this.props;
-      if (!isDragging) {
-        onDragStart();
-        // At the point when we drop this element may no longer exist
-        this.el && this.el.blur();
-      }
-    }, 1000);
+    this.el && this.el.focus();
   }
 
-  handleButtonRelease(e) {
-    clearTimeout(this.buttonPressTimer);
-  }
-
-  handleBlur(e) {
+  handleDragStart(e) {
     // Stop event so that it doesn't go to the Column
     // We may need to allow it to propagate in order to
     // change possition within column
     e.stopPropagation();
-    if (this.props.isDragging) {
-      // clicking on contentEditable element focuses it automatically,
-      // so we have to force blur when dragging (no keyboard will appear)
-      this.el.blur();
-    }
+    this.props.onDragStart();
   }
 
   handleNewInput(e) {
@@ -74,23 +57,21 @@ export default class Task extends Component {
     return (
       <div
         id={id}
-        ref={this.getRef}
         className={classNames("Task", { "Task--dragging": isDragging })}
         draggable
-        autoFocus
         onDragStart={onDragStart}
-        onClick={this.handleBlur}
-        onInput={this.handleNewInput}
-        // TODO: split touch and desktop
-        onTouchStart={this.handleButtonPress}
-        onTouchEnd={this.handleButtonRelease}
-        onMouseDown={this.handleButtonPress}
-        onMouseUp={this.handleButtonRelease}
-        onMouseLeave={this.handleButtonRelease}
+        onClick={this.handleDragStart}
       >
-        {children}
+        <div
+          className="Task-text"
+          ref={this.getRef}
+          onInput={this.handleNewInput}
+        >
+          {children}
+        </div>
         <div className="Task-options">
           <span className="Task-options-delete" onClick={this.handleDelete} />
+          <span className="Task-options-rename" onClick={this.handleFocus} />
         </div>
       </div>
     );

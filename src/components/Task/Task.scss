@@ -12,9 +12,12 @@
     line-height: 24px;
     color: #444;
     text-align: center;
-    outline: none;
     overflow: hidden;
     user-select: text;
+
+    &-text {
+        outline: none;
+    }
 
     &--dragging {
         top: -4px;
@@ -43,14 +46,14 @@
         position: absolute;
         top: 0;
         left: 0;
-        display: block;
+        display: flex;
         height: 100%;
         width: 100%;
         transform: translateX(100%);
         transition: transform 0.2s ease-in;
 
         &-delete {
-            display: flex;
+            display: inline-flex;
             justify-content: center;
             align-items: center;
             width: 70px;
@@ -65,11 +68,28 @@
                 color: #fff;
             }
         }
+
+        &-rename {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 100%;
+            background-color: #444;
+            cursor: pointer;
+
+            &:after {
+                // TODO: Replace with an icon
+                content: "Rename";
+                font-size: 14px;
+                color: #fff;
+            }
+        }
     }
 
     &:hover {
         .Task-options {
-            transform: translateX(calc(100% - 70px));
+            transform: translateX(calc(100% - 140px));
             transition: transform 0.2s ease-out;
         }
     }
