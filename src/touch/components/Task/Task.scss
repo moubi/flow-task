@@ -1,0 +1,103 @@
+.Task {
+    position: relative;
+    min-height: 70px;
+    margin: 20px 0;
+    padding: 15px 10px 10px 10px;
+    background-color: #FFEB80;
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+
+    font-family: monospace;
+    font-size: 16px;
+    line-height: 24px;
+    color: #444;
+    text-align: center;
+    overflow: hidden;
+    user-select: text;
+
+    &-text {
+        outline: none;
+        transform: translateX(0);
+        transition: transform 0.2s ease-in;
+    }
+
+    &--dragging {
+        top: -4px;
+        left: -4px;
+        background-color: #FFDE33;
+        box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    &-delete {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 24px;
+        height: 24px;
+        color: #444;
+        cursor: pointer;
+
+        &:before {
+            content: "x";
+            font-style: normal;
+        }
+    }
+
+    &-options {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        height: 100%;
+        width: 100%;
+        transform: translateX(100%);
+        transition: transform 0.2s ease-in;
+
+        &-delete {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 100%;
+            background-color: #f00;
+            cursor: pointer;
+
+            &:after {
+                // TODO: Replace with an icon
+                content: "Delete";
+                font-size: 14px;
+                color: #fff;
+            }
+        }
+
+        &-rename {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 100%;
+            background-color: #444;
+            cursor: pointer;
+
+            &:after {
+                // TODO: Replace with an icon
+                content: "Rename";
+                font-size: 14px;
+                color: #fff;
+            }
+        }
+    }
+
+    &:hover {
+        .Task-options {
+            transform: translateX(calc(100% - 140px));
+            transition: transform 0.2s ease-out;
+        }
+
+        .Task-text {
+            transform: translateX(-140px);
+            transition: transform 0.2s ease-out;
+        }
+    }
+}
