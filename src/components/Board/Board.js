@@ -118,7 +118,6 @@ export default class Board extends Component {
 
   render() {
     const { columns, draggedData } = this.state;
-    const { isTouch } = this.props;
     const draggedTaskId = draggedData.task ? draggedData.task.id : null;
 
     return (
@@ -139,7 +138,6 @@ export default class Board extends Component {
               <Task
                 id={task.id}
                 key={task.id}
-                isTouch={isTouch}
                 isDragging={draggedTaskId === task.id}
                 text={task.text}
                 onChange={value =>
@@ -157,6 +155,5 @@ export default class Board extends Component {
 }
 
 Board.propTypes = {
-  isTouch: PropTypes.bool.isRequired,
   data: PropTypes.object.isRequired
 };
