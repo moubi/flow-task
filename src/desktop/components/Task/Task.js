@@ -10,17 +10,20 @@ export default class Task extends Component {
 
     this.el = null;
     this.state = {
-      text: props.text
+      text: props.text,
+      showOptions: false
     };
     this.handleDragStart = this.handleDragStart.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.text !== this.state.text) {
+  shouldComponentUpdate({ text }, { showOptions }) {
+    if (text !== this.state.text || showOptions !== this.state.showOptions) {
       return true;
     }
     return false;
@@ -31,6 +34,8 @@ export default class Task extends Component {
     e.stopPropagation();
     this.el.setAttribute("contentEditable", true);
     this.el && this.el.focus();
+    // Close the options menu when renaming
+    this.handleMouseLeave();
   }
 
   handleBlur(e) {
@@ -61,17 +66,30 @@ export default class Task extends Component {
     this.props.onDelete();
   }
 
+  handleMouseEnter() {
+    this.setState({ showOptions: true });
+  }
+
+  handleMouseLeave() {
+    this.setState({ showOptions: false });
+  }
+
   render() {
     const { id, onDragStart, isDragging = false } = this.props;
-    const { text } = this.state;
+    const { text, showOptions } = this.state;
 
     return (
       <div
         id={id}
-        className={classNames("Task", { "Task--dragging": isDragging })}
+        className={classNames("Task", {
+          "Task--dragging": isDragging,
+          "Task--showOptions": showOptions
+        })}
         draggable
         onDragStart={onDragStart}
         onClick={this.handleDragStart}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
       >
         <div
           className="Task-text"
