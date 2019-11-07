@@ -54,42 +54,28 @@
         transform: translateX(100%);
         transition: transform 0.2s ease-in;
 
-        &-delete {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 70px;
-            height: 100%;
-            background-color: #f00;
-            cursor: pointer;
-
-            &:after {
-                // TODO: Replace with an icon
-                content: "Delete";
-                font-size: 14px;
-                color: #fff;
-            }
-        }
-
+        &-delete,
         &-rename {
             display: inline-flex;
             justify-content: center;
             align-items: center;
             width: 70px;
             height: 100%;
-            background-color: #444;
+            font-size: 14px;
+            color: #fff;
             cursor: pointer;
+        }
 
-            &:after {
-                // TODO: Replace with an icon
-                content: "Rename";
-                font-size: 14px;
-                color: #fff;
-            }
+        &-delete {
+            background-color: #f00;
+        }
+
+        &-rename {
+            background-color: #444;
         }
     }
 
-    &:hover {
+    &--showOptions {
         .Task-options {
             transform: translateX(calc(100% - 140px));
             transition: transform 0.2s ease-out;

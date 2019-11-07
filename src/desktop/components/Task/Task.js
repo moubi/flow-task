@@ -102,8 +102,12 @@ export default class Task extends Component {
           {text}
         </div>
         <div className="Task-options">
-          <span className="Task-options-delete" onClick={this.handleDelete} />
-          <span className="Task-options-rename" onClick={this.handleFocus} />
+          <span className="Task-options-delete" onClick={this.handleDelete}>
+            Delete
+          </span>
+          <span className="Task-options-rename" onClick={this.handleFocus}>
+            Rename
+          </span>
         </div>
       </div>
     );
