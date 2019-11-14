@@ -1,8 +1,8 @@
 .Task {
+    display: flex;
     position: relative;
     min-height: 70px;
     margin: 20px 0;
-    padding: 15px 10px 10px 10px;
     background-color: #FFEB80;
     box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
@@ -16,6 +16,8 @@
     user-select: text;
 
     &-text {
+        width: 100%;
+        padding: 15px 10px 10px 10px;
         outline: none;
         transform: translateX(0);
         transition: transform 0.2s ease-in;
