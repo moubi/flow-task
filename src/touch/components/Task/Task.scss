@@ -77,7 +77,7 @@
         }
     }
 
-    &--showOptions {
+    &--isOptionsMenuShown {
         .Task-options {
             transform: translateX(calc(100% - 140px));
             transition: transform 0.2s ease-out;

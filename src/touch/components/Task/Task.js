@@ -5,6 +5,10 @@ import "swiped-events";
 
 import "./Task.scss";
 
+const preventDefault = e => {
+  e.preventDefault();
+};
+
 export default class Task extends Component {
   constructor(props) {
     super(props);
@@ -12,56 +16,76 @@ export default class Task extends Component {
     this.el = null;
     this.state = {
       text: props.text,
-      showOptions: false
+      isOptionsMenuShown: false,
+      isRenameEnabled: false
     };
+
     this.handleDragStart = this.handleDragStart.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
+    this.handleEnableRenaming = this.handleEnableRenaming.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.showOptionsMenu = this.showOptionsMenu.bind(this);
+    this.hideOptionsMenu = this.hideOptionsMenu.bind(this);
   }
 
   componentDidMount() {
-    this.el.addEventListener("swiped-left", e => {
-      this.setState({ showOptions: true });
-    });
-
-    this.el.addEventListener("swiped-right", e => {
-      this.setState({ showOptions: false });
-    });
-
+    this.el.addEventListener("swiped-left", this.showOptionsMenu);
+    this.el.addEventListener("swiped-right", this.hideOptionsMenu);
     // Prevent scrolling the whole board when performing swipe on a task
-    this.el.addEventListener(
-      "touchmove",
-      e => {
-        e.preventDefault();
-      },
-      false
-    );
+    // That will completely disable scroll when performing touchmove on a task
+    // FIXME: This could be attached directly to the element in the JSX, but
+    // currently there is a react issue that needs to be fixed first
+    // https://www.chromestatus.com/features/5093566007214080
+    this.el.addEventListener("touchmove", preventDefault, false);
   }
 
-  shouldComponentUpdate({ text }, { showOptions }) {
-    if (text !== this.state.text || showOptions !== this.state.showOptions) {
+  componentWillUnmount() {
+    this.el.removeEventListener("swiped-left", this.showOptionsMenu);
+    this.el.removeEventListener("swiped-right", this.hideOptionsMenu);
+    this.el.removeEventListener("touchmove", preventDefault, false);
+  }
+
+  showOptionsMenu() {
+    this.setState({ isOptionsMenuShown: true });
+  }
+
+  hideOptionsMenu() {
+    this.setState({ isOptionsMenuShown: false });
+  }
+
+  shouldComponentUpdate({ text }, { isOptionsMenuShown }) {
+    if (
+      text !== this.state.text ||
+      isOptionsMenuShown !== this.state.isOptionsMenuShown
+    ) {
       return true;
     }
     return false;
   }
 
-  handleFocus(e) {
-    // Prevent click to bubble up to the Column and trigger drag
+  handleEnableRenaming(e) {
+    // Prevent click of bubbling up to the Column and triggering drag
     e.stopPropagation();
-    this.el.setAttribute("contentEditable", true);
-    this.el && this.el.focus();
-    // Close the options menu when renaming
-    this.setState({ showOptions: false });
+    this.setState(
+      {
+        isOptionsMenuShown: false,
+        isRenameEnabled: true
+      },
+      () => {
+        // TODO: call focus() on options menu animation end, so that
+        // we have proper horizontal scroll
+        this.el && this.el.focus();
+      }
+    );
   }
 
   handleBlur(e) {
-    // Remove contentEditable on blur, so that it's not possible
-    // to edit when click on the element.
+    // Remove contentEditable on blur,
+    // so that it's not possible to edit when click on the element.
     // Click triggers drag, so we want to avoid it
     // TODO: when proper dnd is implemented, this may not be needed
-    this.el.setAttribute("contentEditable", false);
+    this.setState({ isRenameEnabled: false });
   }
 
   handleDragStart(e) {
@@ -86,14 +110,14 @@ export default class Task extends Component {
 
   render() {
     const { id, onDragStart, isDragging = false } = this.props;
-    const { text, showOptions } = this.state;
+    const { text, isOptionsMenuShown, isRenameEnabled } = this.state;
 
     return (
       <div
         id={id}
         className={classNames("Task", {
           "Task--dragging": isDragging,
-          "Task--showOptions": showOptions
+          "Task--isOptionsMenuShown": isOptionsMenuShown
         })}
         draggable
         onDragStart={onDragStart}
@@ -104,6 +128,7 @@ export default class Task extends Component {
           ref={el => {
             this.el = el;
           }}
+          contentEditable={isRenameEnabled}
           onInput={this.handleTextChange}
           onBlur={this.handleBlur}
         >
@@ -113,7 +138,10 @@ export default class Task extends Component {
           <span className="Task-options-delete" onClick={this.handleDelete}>
             Delete
           </span>
-          <span className="Task-options-rename" onClick={this.handleFocus}>
+          <span
+            className="Task-options-rename"
+            onClick={this.handleEnableRenaming}
+          >
             Rename
           </span>
         </div>
