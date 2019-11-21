@@ -107,6 +107,7 @@ export default class Board extends Component {
                       draggableId={task.id}
                       index={taskIndex}
                       key={task.id}
+                      disableInteractiveElementBlocking
                     >
                       {(provided, snapshot) => (
                         // TODO: the reason a <div /> wrapper is used here

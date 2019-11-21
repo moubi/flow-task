@@ -16,12 +16,10 @@ export default class Task extends Component {
     this.el = null;
     this.state = {
       text: props.text,
-      isOptionsMenuShown: false,
-      isRenameEnabled: false
+      isOptionsMenuShown: false
     };
 
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleEnableRenaming = this.handleEnableRenaming.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.showOptionsMenu = this.showOptionsMenu.bind(this);
@@ -45,14 +43,6 @@ export default class Task extends Component {
     this.el.removeEventListener("touchmove", preventDefault, false);
   }
 
-  showOptionsMenu() {
-    this.setState({ isOptionsMenuShown: true });
-  }
-
-  hideOptionsMenu() {
-    this.setState({ isOptionsMenuShown: false });
-  }
-
   shouldComponentUpdate({ text, isDragging }, { isOptionsMenuShown }) {
     if (
       text !== this.state.text ||
@@ -64,28 +54,16 @@ export default class Task extends Component {
     return false;
   }
 
-  handleEnableRenaming(e) {
-    // Prevent click of bubbling up to the Column and triggering drag
-    e.stopPropagation();
-    this.setState(
-      {
-        isOptionsMenuShown: false,
-        isRenameEnabled: true
-      },
-      () => {
-        // TODO: call focus() on options menu animation end, so that
-        // we have proper horizontal scroll
-        this.el && this.el.focus();
-      }
-    );
+  showOptionsMenu() {
+    this.setState({ isOptionsMenuShown: true });
   }
 
-  handleBlur(e) {
-    // Remove contentEditable on blur,
-    // so that it's not possible to edit when click on the element.
-    // Click triggers drag, so we want to avoid it
-    // TODO: when proper dnd is implemented, this may not be needed
-    this.setState({ isRenameEnabled: false });
+  hideOptionsMenu() {
+    this.setState({ isOptionsMenuShown: false });
+  }
+
+  handleFocus() {
+    this.el && this.el.focus();
   }
 
   handleTextChange(e) {
@@ -101,8 +79,8 @@ export default class Task extends Component {
   }
 
   render() {
-    const { id, onDragStart, isDragging } = this.props;
-    const { text, isOptionsMenuShown, isRenameEnabled } = this.state;
+    const { id, isDragging } = this.props;
+    const { text, isOptionsMenuShown } = this.state;
 
     return (
       <div
@@ -111,17 +89,15 @@ export default class Task extends Component {
           "Task--dragging": isDragging,
           "Task--isOptionsMenuShown": isOptionsMenuShown
         })}
-        draggable
-        onDragStart={onDragStart}
       >
         <div
           className="Task-text"
           ref={el => {
             this.el = el;
           }}
-          contentEditable={isRenameEnabled}
+          contentEditable
           onInput={this.handleTextChange}
-          onBlur={this.handleBlur}
+          onClick={this.handleFocus}
         >
           {text}
         </div>
@@ -129,11 +105,8 @@ export default class Task extends Component {
           <span className="Task-options-delete" onClick={this.handleDelete}>
             Delete
           </span>
-          <span
-            className="Task-options-rename"
-            onClick={this.handleEnableRenaming}
-          >
-            Rename
+          <span className="Task-options-complete" onClick={() => {}}>
+            Complete
           </span>
         </div>
       </div>

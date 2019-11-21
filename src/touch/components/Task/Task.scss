@@ -19,11 +19,7 @@
         outline: none;
         transform: translateX(0);
         transition: transform 0.2s ease-in;
-        user-select: none;
-
-        &[contenteditable=true] {
-            user-select: text;
-        }
+        user-select: text;
     }
 
     &--dragging {
@@ -58,7 +54,7 @@
         transition: transform 0.2s ease-in;
 
         &-delete,
-        &-rename {
+        &-complete {
             display: inline-flex;
             justify-content: center;
             align-items: center;
@@ -73,7 +69,7 @@
             background-color: #f00;
         }
 
-        &-rename {
+        &-complete {
             background-color: #444;
         }
     }
