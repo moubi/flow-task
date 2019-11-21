@@ -12,6 +12,7 @@ import "./Board.scss";
 
 // TODO: Figure out a better way
 const FIRST_COLUMN_ID = "d1ea1845-86e2-4c46-976c-8b09ba4786e5";
+const LAST_COLUMN_ID = "24f4dcf8-b471-488c-a1be-b56ea116e712";
 
 const getNewTask = () => ({
   id: uuid(),
@@ -29,6 +30,7 @@ export default class Board extends Component {
     this.handleDragEnd = this.handleDragEnd.bind(this);
     this.handleTaskTextChange = this.handleTaskTextChange.bind(this);
     this.handleTaskAddition = this.handleTaskAddition.bind(this);
+    this.handleTaskCompletion = this.handleTaskCompletion.bind(this);
     this.saveBoardDataWithDelay = debounce(saveBoardData, 500);
   }
 
@@ -65,7 +67,21 @@ export default class Board extends Component {
     columns[columnId].tasks.splice(taskIndex, 1);
 
     this.setState({ columns }, () => {
-      this.saveBoardDataWithDelay({ columns });
+      saveBoardData({ columns });
+    });
+  }
+
+  handleTaskCompletion(taskIndex, columnId) {
+    const { columns } = this.state;
+    // Do nothing if we are trying to complete completed task
+    if (columnId === LAST_COLUMN_ID) {
+      return;
+    }
+    columns[LAST_COLUMN_ID].tasks.push(columns[columnId].tasks[taskIndex]);
+    columns[columnId].tasks.splice(taskIndex, 1);
+
+    this.setState({ columns }, () => {
+      saveBoardData({ columns });
     });
   }
 
@@ -131,6 +147,9 @@ export default class Board extends Component {
                             onDelete={() =>
                               this.handleTaskDeletion(taskIndex, column.id)
                             }
+                            onComplete={() => {
+                              this.handleTaskCompletion(taskIndex, column.id);
+                            }}
                             // Drag&Drop related props
                             isDragging={snapshot.isDragging}
                           />

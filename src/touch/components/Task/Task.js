@@ -22,6 +22,7 @@ export default class Task extends Component {
     this.handleFocus = this.handleFocus.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleComplete = this.handleComplete.bind(this);
     this.showOptionsMenu = this.showOptionsMenu.bind(this);
     this.hideOptionsMenu = this.hideOptionsMenu.bind(this);
   }
@@ -73,9 +74,13 @@ export default class Task extends Component {
     });
   }
 
-  handleDelete(e) {
-    e.stopPropagation();
+  handleDelete() {
     this.props.onDelete();
+  }
+
+  handleComplete() {
+    this.props.onComplete();
+    this.hideOptionsMenu();
   }
 
   render() {
@@ -105,7 +110,7 @@ export default class Task extends Component {
           <span className="Task-options-delete" onClick={this.handleDelete}>
             Delete
           </span>
-          <span className="Task-options-complete" onClick={() => {}}>
+          <span className="Task-options-complete" onClick={this.handleComplete}>
             Complete
           </span>
         </div>
@@ -119,5 +124,6 @@ Task.propTypes = {
   text: PropTypes.string,
   isDragging: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
+  onComplete: PropTypes.func.isRequired
 };
