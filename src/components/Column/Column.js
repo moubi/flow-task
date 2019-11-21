@@ -5,16 +5,23 @@ import "./Column.scss";
 
 export default class Column extends Component {
   render() {
-    const { id, name, count, children, onDrop, onDragOver, onAdd } = this.props;
+    const {
+      id,
+      name,
+      count,
+      children,
+      onAdd,
+      innerRef,
+      droppableProps
+    } = this.props;
 
     return (
       <div
         id={id}
         name={name}
         className="Column"
-        onDrop={onDrop}
-        onClick={onDrop}
-        onDragOver={onDragOver}
+        ref={innerRef}
+        {...droppableProps}
       >
         <header>
           <h2>
@@ -33,7 +40,7 @@ Column.propTypes = {
   name: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
   shouldHaveAddIcon: PropTypes.bool,
-  onDrop: PropTypes.func.isRequired,
-  onDragOver: PropTypes.func.isRequired,
-  onAdd: PropTypes.func
+  onAdd: PropTypes.func,
+  droppableProps: PropTypes.object.isRequired,
+  innerRef: PropTypes.func.isRequired
 };

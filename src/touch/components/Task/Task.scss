@@ -2,10 +2,9 @@
     display: flex;
     position: relative;
     min-height: 70px;
-    margin: 20px 0;
-    background-color: #FFEB80;
-    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2);
+    background-color: #ffeb80;
     box-sizing: border-box;
+    border-bottom: 1px solid #d6d5d5;
 
     font-family: monospace;
     font-size: 16px;
@@ -13,7 +12,6 @@
     color: #444;
     text-align: center;
     overflow: hidden;
-    user-select: text;
 
     &-text {
         width: 100%;
@@ -21,13 +19,16 @@
         outline: none;
         transform: translateX(0);
         transition: transform 0.2s ease-in;
+        user-select: none;
+
+        &[contenteditable=true] {
+            user-select: text;
+        }
     }
 
     &--dragging {
-        top: -4px;
-        left: -4px;
         background-color: #FFDE33;
-        box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.2);
+        user-select: none;
     }
 
     &-delete {

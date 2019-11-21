@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import uuid from "uuid/v4";
 import PropTypes from "prop-types";
 import { debounce } from "lodash";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { saveBoardData } from "../../store/actions";
 
 import Column from "../Column/Column";
@@ -22,70 +23,33 @@ export default class Board extends Component {
     super(props);
 
     this.state = {
-      columns: props.data.columns,
-      draggedData: {}
+      columns: props.data.columns
     };
 
-    this.handleDragStart = this.handleDragStart.bind(this);
-    this.handleDragOver = this.handleDragOver.bind(this);
-    this.handleDrop = this.handleDrop.bind(this);
+    this.handleDragEnd = this.handleDragEnd.bind(this);
     this.handleTaskTextChange = this.handleTaskTextChange.bind(this);
     this.handleTaskAddition = this.handleTaskAddition.bind(this);
     this.saveBoardDataWithDelay = debounce(saveBoardData, 500);
   }
 
-  handleDragStart(task, sourceColumnId) {
-    this.setState({
-      draggedData: {
-        task,
-        sourceColumnId
-      }
-    });
-  }
-
-  handleDragOver(e) {
-    e.preventDefault();
-  }
-
-  handleDrop(e) {
-    const { task: draggedTask, sourceColumnId } = this.state.draggedData;
-
-    if (e.target === null || !draggedTask) {
+  handleDragEnd(options) {
+    if (!options.destination) {
       return;
     }
-    const dropColumnId = e.target.id;
 
     const { columns } = this.state;
-    const dropColumn = columns[dropColumnId];
-    const sourceColumn = columns[sourceColumnId];
+    const destinationIndex = options.destination.index;
+    const destinationColumn = columns[options.destination.droppableId];
+    const sourceIndex = options.source.index;
+    const sourceColumn = columns[options.source.droppableId];
+    const draggedTask = sourceColumn.tasks[sourceIndex];
 
-    // TODO: Handle the case when we should reorder in the same column
-    if (dropColumnId !== sourceColumnId) {
-      dropColumn.tasks = [...new Set([...dropColumn.tasks, draggedTask])];
-      sourceColumn.tasks = sourceColumn.tasks.filter(
-        task => task.id !== draggedTask.id
-      );
-    }
+    sourceColumn.tasks.splice(sourceIndex, 1);
+    destinationColumn.tasks.splice(destinationIndex, 0, draggedTask);
 
-    const reorderedColumns = {
-      ...columns,
-      [dropColumnId]: {
-        ...dropColumn
-      },
-      [sourceColumnId]: {
-        ...sourceColumn
-      }
-    };
-
-    this.setState(
-      {
-        draggedData: {},
-        columns: reorderedColumns
-      },
-      () => {
-        saveBoardData({ columns: reorderedColumns });
-      }
-    );
+    this.setState({ columns }, () => {
+      saveBoardData({ columns });
+    });
   }
 
   handleTaskTextChange(taskIndex, columnId, value) {
@@ -117,38 +81,68 @@ export default class Board extends Component {
   }
 
   render() {
-    const { columns, draggedData } = this.state;
-    const draggedTaskId = draggedData.task ? draggedData.task.id : null;
+    const { columns } = this.state;
 
     return (
       <div className="Board">
-        {Object.values(columns).map(column => (
-          <Column
-            id={column.id}
-            key={column.id}
-            name={column.name}
-            count={column.tasks.length}
-            onAdd={
-              column.id === FIRST_COLUMN_ID ? this.handleTaskAddition : null
-            }
-            onDrop={this.handleDrop}
-            onDragOver={this.handleDragOver}
-          >
-            {column.tasks.map((task, taskIndex) => (
-              <Task
-                id={task.id}
-                key={task.id}
-                isDragging={draggedTaskId === task.id}
-                text={task.text}
-                onChange={value =>
-                  this.handleTaskTextChange(taskIndex, column.id, value)
-                }
-                onDelete={() => this.handleTaskDeletion(taskIndex, column.id)}
-                onDragStart={() => this.handleDragStart(task, column.id)}
-              />
-            ))}
-          </Column>
-        ))}
+        <DragDropContext onDragEnd={this.handleDragEnd}>
+          {Object.values(columns).map(column => (
+            <Droppable key={column.id} droppableId={column.id} type="COLUMN">
+              {(provided, snapshot) => (
+                <Column
+                  id={column.id}
+                  name={column.name}
+                  count={column.tasks.length}
+                  onAdd={
+                    column.id === FIRST_COLUMN_ID
+                      ? this.handleTaskAddition
+                      : null
+                  }
+                  // Drag&Drop related props
+                  innerRef={provided.innerRef}
+                  droppableProps={provided.droppableProps}
+                >
+                  {column.tasks.map((task, taskIndex) => (
+                    <Draggable
+                      draggableId={task.id}
+                      index={taskIndex}
+                      key={task.id}
+                    >
+                      {(provided, snapshot) => (
+                        // TODO: the reason a <div /> wrapper is used here
+                        // is because Task has a dynamic loader which does not
+                        // return component on first load
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <Task
+                            id={task.id}
+                            text={task.text}
+                            onChange={value =>
+                              this.handleTaskTextChange(
+                                taskIndex,
+                                column.id,
+                                value
+                              )
+                            }
+                            onDelete={() =>
+                              this.handleTaskDeletion(taskIndex, column.id)
+                            }
+                            // Drag&Drop related props
+                            isDragging={snapshot.isDragging}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </Column>
+              )}
+            </Droppable>
+          ))}
+        </DragDropContext>
       </div>
     );
   }

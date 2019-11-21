@@ -20,7 +20,6 @@ export default class Task extends Component {
       isRenameEnabled: false
     };
 
-    this.handleDragStart = this.handleDragStart.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleEnableRenaming = this.handleEnableRenaming.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
@@ -54,10 +53,11 @@ export default class Task extends Component {
     this.setState({ isOptionsMenuShown: false });
   }
 
-  shouldComponentUpdate({ text }, { isOptionsMenuShown }) {
+  shouldComponentUpdate({ text, isDragging }, { isOptionsMenuShown }) {
     if (
       text !== this.state.text ||
-      isOptionsMenuShown !== this.state.isOptionsMenuShown
+      isOptionsMenuShown !== this.state.isOptionsMenuShown ||
+      isDragging !== this.props.isDragging
     ) {
       return true;
     }
@@ -88,14 +88,6 @@ export default class Task extends Component {
     this.setState({ isRenameEnabled: false });
   }
 
-  handleDragStart(e) {
-    // Stop event so that it doesn't go to the Column
-    // We may need to allow it to propagate in order to
-    // change possition within column
-    e.stopPropagation();
-    this.props.onDragStart();
-  }
-
   handleTextChange(e) {
     const text = e.target.innerText;
     this.setState({ text }, () => {
@@ -109,7 +101,7 @@ export default class Task extends Component {
   }
 
   render() {
-    const { id, onDragStart, isDragging = false } = this.props;
+    const { id, onDragStart, isDragging } = this.props;
     const { text, isOptionsMenuShown, isRenameEnabled } = this.state;
 
     return (
@@ -121,7 +113,6 @@ export default class Task extends Component {
         })}
         draggable
         onDragStart={onDragStart}
-        onClick={this.handleDragStart}
       >
         <div
           className="Task-text"
@@ -153,8 +144,7 @@ export default class Task extends Component {
 Task.propTypes = {
   id: PropTypes.string.isRequired,
   text: PropTypes.string,
-  isDragging: PropTypes.bool,
+  isDragging: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onDragStart: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired
 };

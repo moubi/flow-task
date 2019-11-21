@@ -6,7 +6,7 @@
     border-right: 1px solid #d6d5d5;
 
     &:last-child {
-        border: none;
+        border-right: none;
     }
 
     @media (max-width: 1023px) {
@@ -20,7 +20,7 @@
         align-items: center;
         justify-content: space-between;
         height: 26px;
-        margin: 0 -10px;
+        margin: 0 -10px 10px -10px;
         padding: 5px 10px;
         border-bottom: 1px solid #d6d5d5;
 
