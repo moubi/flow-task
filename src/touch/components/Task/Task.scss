@@ -1,15 +1,19 @@
 .Task {
+    // The surface color is #121212 or hsl(0, 0%, 7%)
+    $surface-color: hsl(0, 0%, 7%);
+    $elevation-5-color: hsl(0, 0%, 12%);
+    $elevation-11-color: hsl(0, 0%, 18%);
+
     display: flex;
     position: relative;
     min-height: 70px;
-    background-color: #ffeb80;
-    box-sizing: border-box;
-    border-bottom: 1px solid #d6d5d5;
+    background-color: $elevation-5-color;
+    border-bottom: 1px solid $surface-color;
 
     font-family: monospace;
     font-size: 16px;
     line-height: 24px;
-    color: #444;
+    color: #fff;
     text-align: center;
     overflow: hidden;
 
@@ -23,7 +27,7 @@
     }
 
     &--dragging {
-        background-color: #FFDE33;
+        background-color: $elevation-11-color;
         user-select: none;
     }
 

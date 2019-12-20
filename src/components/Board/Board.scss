@@ -1,8 +1,10 @@
 .Board {
+    $surface-color: hsl(0, 0%, 7%);
+
     display: flex;
     height: 100%;
     align-items: stretch;
-    background-color: #FFFBE6;
+    background-color: $surface-color;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
 }
