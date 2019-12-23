@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import uuid from "uuid/v4";
 import PropTypes from "prop-types";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { saveBoardData } from "../../store/actions";
 
