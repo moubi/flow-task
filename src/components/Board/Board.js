@@ -28,7 +28,8 @@ export default class Board extends Component {
     super(props);
 
     this.state = {
-      columns: props.data.columns
+      columns: props.data.columns,
+      tasks: props.data.tasks
     };
 
     this.handleDragEnd = this.handleDragEnd.bind(this);
@@ -60,25 +61,26 @@ export default class Board extends Component {
     sourceColumn.tasks.splice(sourceIndex, 1);
     destinationColumn.tasks.splice(destinationIndex, 0, draggedTask);
 
-    this.setState({ columns }, () => {
-      saveBoardData({ columns });
+    this.setState({ ...this.state, columns }, () => {
+      saveBoardData({ ...this.state });
     });
   }
 
-  handleTaskTextChange(taskIndex, columnId, value) {
-    const { columns } = this.state;
-    columns[columnId].tasks[taskIndex].text = value;
-    this.setState({ columns }, () => {
-      this.saveBoardDataWithDelay({ columns });
+  handleTaskTextChange(taskId, value) {
+    const { tasks } = this.state;
+    tasks[taskId].text = value;
+    this.setState({ tasks }, () => {
+      this.saveBoardDataWithDelay({ ...this.state });
     });
   }
 
   handleTaskDeletion(taskIndex, columnId) {
-    const { columns } = this.state;
+    const { columns, tasks } = this.state;
+    delete tasks[columns[columnId].tasks[taskIndex]];
     columns[columnId].tasks.splice(taskIndex, 1);
 
-    this.setState({ columns }, () => {
-      saveBoardData({ columns });
+    this.setState({ columns, tasks }, () => {
+      saveBoardData({ ...this.state });
     });
   }
 
@@ -92,23 +94,26 @@ export default class Board extends Component {
     columns[columnId].tasks.splice(taskIndex, 1);
 
     this.setState({ columns }, () => {
-      saveBoardData({ columns });
+      saveBoardData({ ...this.state });
     });
   }
 
   handleTaskAddition() {
-    const { columns } = this.state;
+    const { columns, tasks } = this.state;
     // Add the new task to first position
-    columns[FIRST_COLUMN_ID].tasks = [getNewTask()].concat(
+    const newTask = getNewTask();
+    columns[FIRST_COLUMN_ID].tasks = [newTask.id].concat(
       columns[FIRST_COLUMN_ID].tasks
     );
-    this.setState({ columns }, () => {
-      saveBoardData({ columns });
+    tasks[newTask.id] = newTask;
+
+    this.setState({ columns, tasks }, () => {
+      saveBoardData({ ...this.state });
     });
   }
 
   render() {
-    const { columns } = this.state;
+    const { columns, tasks } = this.state;
 
     return (
       <div className="Board">
@@ -129,11 +134,11 @@ export default class Board extends Component {
                   innerRef={provided.innerRef}
                   droppableProps={provided.droppableProps}
                 >
-                  {column.tasks.map((task, taskIndex) => (
+                  {column.tasks.map((taskId, taskIndex) => (
                     <Draggable
-                      draggableId={task.id}
+                      draggableId={taskId}
                       index={taskIndex}
-                      key={task.id}
+                      key={taskId}
                       disableInteractiveElementBlocking
                     >
                       {(provided, snapshot) => (
@@ -146,12 +151,11 @@ export default class Board extends Component {
                           {...provided.dragHandleProps}
                         >
                           <Task
-                            id={task.id}
-                            text={task.text}
+                            id={taskId}
+                            text={tasks[taskId].text}
                             onChange={value =>
                               this.handleTaskTextChange(
-                                taskIndex,
-                                column.id,
+                                taskId,
                                 value
                               )
                             }

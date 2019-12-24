@@ -6,6 +6,8 @@ import App from "./App";
 
 import "./index.scss";
 
+window.kanban_board = store;
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
