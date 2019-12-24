@@ -19,6 +19,10 @@ const getNewTask = () => ({
   value: ""
 });
 
+const stopImmediatePropagation = e => {
+  e.stopImmediatePropagation()
+};
+
 export default class Board extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +36,13 @@ export default class Board extends Component {
     this.handleTaskAddition = this.handleTaskAddition.bind(this);
     this.handleTaskCompletion = this.handleTaskCompletion.bind(this);
     this.saveBoardDataWithDelay = debounce(saveBoardData, 500);
+    // This is needed in order to disable dragging with keyboard
+    // It doesn't work if placed in componentWillMount
+    window.addEventListener("keydown", stopImmediatePropagation, true);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("keydown", stopImmediatePropagation, true);
   }
 
   handleDragEnd(options) {

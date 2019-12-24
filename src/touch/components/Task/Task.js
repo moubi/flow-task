@@ -19,7 +19,7 @@ export default class Task extends Component {
       isOptionsMenuShown: false
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleTap = this.handleTap.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
@@ -63,8 +63,10 @@ export default class Task extends Component {
     this.setState({ isOptionsMenuShown: false });
   }
 
-  handleClick() {
-    this.el && this.el.focus();
+  handleTap() {
+    if (!this.props.isDragging && this.el) {
+      this.el.focus();
+    }
   }
 
   handleTextChange(e) {
@@ -102,7 +104,7 @@ export default class Task extends Component {
           }}
           contentEditable
           onInput={this.handleTextChange}
-          onClick={this.handleClick}
+          onTouchEnd={this.handleTap}
         >
           {text}
         </div>
