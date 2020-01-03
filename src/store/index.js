@@ -1,8 +1,8 @@
-import { createStore } from "redux";
-import { combineReducers } from "redux";
+import { createStore, combineReducers } from "redux";
 import ui from "./ui";
-import board from "./board";
+import columns from "./columns";
+import tasks from "./tasks";
 
-const reducers = combineReducers({ ...ui, ...board });
+const reducers = combineReducers({ ...ui, ...columns, ...tasks });
 
 export default createStore(reducers);

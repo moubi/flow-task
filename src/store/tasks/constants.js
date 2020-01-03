@@ -1,0 +1,3 @@
+export const DELETE_TASK_REQUEST = "@tasks/DELETE_TASK_REQUEST";
+export const DELETE_TASK_SUCCESS = "@tasks/DELETE_TASK_SUCCESS";
+export const DELETE_TASK_FAILURE = "@tasks/DELETE_TASK_FAILURE";
