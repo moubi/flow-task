@@ -17,7 +17,8 @@
     "uuid": "3.0.1"
   },
   "devDependencies": {
-    "classnames": "2.2.5"
+    "classnames": "2.2.5",
+    "redux-thunk": "2.3.0"
   },
   "scripts": {
     "client": "PORT=3002 react-scripts start",
