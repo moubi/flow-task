@@ -1,19 +1,25 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+import { connect } from "react-redux";
+import { createTaskInColumn } from "../../store/actions";
 import "./Column.scss";
 
-export default class Column extends Component {
+// TODO: Use selector instead
+const FIRST_COLUMN_ID = "d1ea1845-86e2-4c46-976c-8b09ba4786e5";
+
+export class Column extends Component {
   render() {
     const {
       id,
       name,
       count,
       children,
-      onAdd,
+      createTaskInColumn,
       innerRef,
       droppableProps
     } = this.props;
+
+    const isFirstColumn = id === FIRST_COLUMN_ID;
 
     return (
       <div
@@ -27,7 +33,7 @@ export default class Column extends Component {
           <h2>
             {name} ({count})
           </h2>
-          {onAdd && <i className="plus" onClick={onAdd} />}
+          {isFirstColumn && <i className="plus" onClick={createTaskInColumn} />}
         </header>
         {children}
       </div>
@@ -40,7 +46,11 @@ Column.propTypes = {
   name: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
   shouldHaveAddIcon: PropTypes.bool,
-  onAdd: PropTypes.func,
   droppableProps: PropTypes.object.isRequired,
-  innerRef: PropTypes.func.isRequired
+  innerRef: PropTypes.func.isRequired,
+  createTaskInColumn: PropTypes.func.isRequired
 };
+
+export default connect(null, {
+  createTaskInColumn
+})(Column);

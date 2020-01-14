@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import classNames from "classnames";
+import debounce from "lodash/debounce";
 import "swiped-events";
+
+import {
+  updateTask,
+  deleteTaskAndUpdateColumn,
+  completeTask
+} from "../../../store/actions";
 
 import "./Task.scss";
 
@@ -9,7 +17,7 @@ const preventDefault = e => {
   e.preventDefault();
 };
 
-export default class Task extends Component {
+export class Task extends Component {
   constructor(props) {
     super(props);
 
@@ -25,6 +33,7 @@ export default class Task extends Component {
     this.handleComplete = this.handleComplete.bind(this);
     this.showOptionsMenu = this.showOptionsMenu.bind(this);
     this.hideOptionsMenu = this.hideOptionsMenu.bind(this);
+    this.updateTask = debounce(props.updateTask, 500);
   }
 
   componentDidMount() {
@@ -71,17 +80,18 @@ export default class Task extends Component {
 
   handleTextChange(e) {
     const text = e.target.innerText;
+
     this.setState({ text }, () => {
-      this.props.onChange(text);
+      this.updateTask(this.props.id, { text });
     });
   }
 
   handleDelete() {
-    this.props.onDelete();
+    this.props.deleteTaskAndUpdateColumn(this.props.id);
   }
 
   handleComplete() {
-    this.props.onComplete();
+    this.props.completeTask(this.props.id);
     this.hideOptionsMenu();
   }
 
@@ -125,7 +135,13 @@ Task.propTypes = {
   id: PropTypes.string.isRequired,
   text: PropTypes.string,
   isDragging: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onComplete: PropTypes.func.isRequired
+  completeTask: PropTypes.func.isRequired,
+  updateTask: PropTypes.func.isRequired,
+  deleteTaskAndUpdateColumn: PropTypes.func.isRequired
 };
+
+export default connect(null, {
+  updateTask,
+  completeTask,
+  deleteTaskAndUpdateColumn
+})(Task);

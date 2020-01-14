@@ -81,8 +81,8 @@ typings/
 # VS code config
 .vscode
 
-# Our simple db file
-/db.json
+# Our simple db files
+/src/db
 
 # misc
 .DS_Store

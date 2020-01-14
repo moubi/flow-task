@@ -1,19 +1,11 @@
-export const loadBoardData = () => {
-  return fetch("/kanban-board")
-    .then(response => response.json())
-    .then(data => {
-      return Promise.resolve(data);
-    });
-};
-
-export const saveBoardData = data => {
-  return fetch("/kanban-board", {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" }
-  })
-    .then(response => response.json())
-    .then(data => {
-      return Promise.resolve(data);
-    });
-};
+export {
+  loadTasks,
+  updateTask,
+  deleteTaskAndUpdateColumn,
+  createTask
+} from "./tasks";
+export { updateColumn, loadColumns } from "./columns";
+export { completeTask } from "./actions/completeTask";
+export { createTaskInColumn } from "./actions/createTaskInColumn";
+export { moveTask } from "./actions/moveTask";
+export { bootstrap } from "./actions/bootstrap";

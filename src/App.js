@@ -1,27 +1,29 @@
 import React, { Component } from "react";
-import { loadBoardData } from "./store/actions";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getColumns, getTasks } from "./store/selectors";
 import Board from "./components/Board/Board";
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      data: null
-    };
-  }
-
-  componentDidMount() {
-    loadBoardData().then(data => {
-      this.setState({ data });
-    });
-  }
-
+export class App extends Component {
   render() {
-    const { data } = this.state;
-    if (!data) {
+    const { columns, tasks } = this.props;
+
+    if (Object.keys(columns).length === 0) {
       return "Loading...";
     }
-    return <Board data={data} isTouch={this.props.isTouch} />;
+
+    return (
+      <Board columns={columns} tasks={tasks} isTouch={this.props.isTouch} />
+    );
   }
 }
+
+App.propTypes = {
+  columns: PropTypes.object.isRequired,
+  tasks: PropTypes.object.isRequired
+};
+
+export default connect(state => ({
+  columns: getColumns(state),
+  tasks: getTasks(state)
+}))(App);
