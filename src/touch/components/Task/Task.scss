@@ -8,7 +8,7 @@
     position: relative;
     min-height: 70px;
     background-color: $elevation-5-color;
-    border-bottom: 1px solid $surface-color;
+    border-bottom: 2px solid $surface-color;
 
     font-family: monospace;
     font-size: 16px;
@@ -29,22 +29,6 @@
     &--dragging {
         background-color: $elevation-11-color;
         user-select: none;
-    }
-
-    &-delete {
-        display: none;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 24px;
-        height: 24px;
-        color: #444;
-        cursor: pointer;
-
-        &:before {
-            content: "x";
-            font-style: normal;
-        }
     }
 
     &-options {
@@ -70,7 +54,11 @@
         }
 
         &-delete {
-            background-color: #f00;
+            background-color: #CF6679;
+            background-image: url("../../../assets/bin.svg");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 24px 24px;
         }
 
         &-complete {

@@ -119,9 +119,7 @@ export class Task extends Component {
           {text}
         </div>
         <div className="Task-options">
-          <span className="Task-options-delete" onClick={this.handleDelete}>
-            Delete
-          </span>
+          <span className="Task-options-delete" onClick={this.handleDelete} />
           <span className="Task-options-complete" onClick={this.handleComplete}>
             Complete
           </span>
