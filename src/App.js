@@ -13,7 +13,7 @@ export class App extends Component {
     }
 
     return (
-      <Board columns={columns} tasks={tasks} isTouch={this.props.isTouch} />
+      <Board columns={columns} tasks={tasks} />
     );
   }
 }

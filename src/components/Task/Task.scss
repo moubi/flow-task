@@ -1,6 +1,6 @@
 .Task {
     // The surface color is #121212 or hsl(0, 0%, 7%)
-    $surface-color: hsl(0, 0%, 7%);
+    // 5% elevation on top of that is added
     $elevation-5-color: hsl(0, 0%, 12%);
     $elevation-11-color: hsl(0, 0%, 18%);
 
@@ -8,7 +8,8 @@
     position: relative;
     min-height: 70px;
     background-color: $elevation-5-color;
-    border-bottom: 2px solid $surface-color;
+    border-bottom: 2px solid transparent;
+    background-clip: padding-box;
 
     font-family: monospace;
     font-size: 16px;
@@ -58,12 +59,12 @@
 
         &-delete {
             background-color: #CF6679;
-            background-image: url("../../../assets/bin.svg");
+            background-image: url("../../assets/bin.svg");
         }
 
         &-complete {
             background-color: #a0e59c;
-            background-image: url("../../../assets/checkmark.svg");
+            background-image: url("../../assets/checkmark.svg");
         }
     }
 

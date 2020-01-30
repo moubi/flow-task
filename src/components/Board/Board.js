@@ -69,9 +69,8 @@ export class Board extends Component {
                             disableInteractiveElementBlocking
                           >
                             {(provided, snapshot) => (
-                              // TODO: the reason a <div /> wrapper is used here
-                              // is because Task has a dynamic loader which does not
-                              // return component on first load
+                              // TODO: Think about removing this wrapper
+                              // at some point and use <Tack /> directly
                               <div
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
@@ -82,6 +81,9 @@ export class Board extends Component {
                                   text={tasks[taskId].text}
                                   // Drag&Drop related props
                                   isDragging={snapshot.isDragging}
+                                  innerRef={provided.innerRef}
+                                  draggableProps={provided.draggableProps}
+                                  dragHandleProps={provided.dragHandleProps}
                                 />
                               </div>
                             )}
