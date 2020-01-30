@@ -1,6 +1,9 @@
 .Column {
-    $surface-color: hsl(0, 0%, 7%);
+    $surface-color: hsl(0, 0%, 7%); // #121212
     $elevation-12-color: hsl(0, 0%, 19%);
+
+    // TODO: use filter: saturate(-400%); for working
+    // with accent colors
 
     flex-grow: 1;
     flex-basis: 0;
