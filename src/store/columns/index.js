@@ -11,13 +11,12 @@ const columnsReducer = (state = initialState, action) => {
       ...action.payload
     };
   } else if (action.type === UPDATE_COLUMN_SUCCESS) {
-    return {
-      ...state,
-      [action.payload.id]: {
-        ...state[action.payload.id],
-        ...action.payload
-      }
+    const stateCopy = { ...state };
+    stateCopy[action.payload.id] = {
+      ...stateCopy[action.payload.id],
+      ...action.payload
     };
+    return stateCopy;
   }
   return state;
 };
