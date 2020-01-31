@@ -22,6 +22,7 @@ export class Task extends Component {
     super(props);
 
     this.el = null;
+    this.isSwiped = false;
     this.state = {
       text: props.text,
       isOptionsMenuShown: false
@@ -40,9 +41,9 @@ export class Task extends Component {
     this.el.addEventListener("swiped-left", this.showOptionsMenu);
     this.el.addEventListener("swiped-right", this.hideOptionsMenu);
     // Prevent scrolling the whole board when performing swipe on a task
-    // That will completely disable scroll when performing touchmove on a task
-    // FIXME: This could be attached directly to the element in the JSX, but
-    // currently there is a react issue that needs to be fixed first
+    // That will completely disable scroll when performing touchmove
+    // FIXME: Event listener could be attached directly to the element in the JSX,
+    // but currently there is a react issue that needs to be fixed first
     // https://www.chromestatus.com/features/5093566007214080
     this.el.addEventListener("touchmove", preventDefault, false);
   }
@@ -65,15 +66,24 @@ export class Task extends Component {
   }
 
   showOptionsMenu() {
+    this.isSwiped = true;
     this.setState({ isOptionsMenuShown: true });
   }
 
   hideOptionsMenu() {
+    this.isSwiped = true;
     this.setState({ isOptionsMenuShown: false });
   }
 
   handleTap() {
     if (!this.props.isDragging && this.el) {
+      // Do not focus when swipe has taken place
+      // This will prevent virtual keyboard of beeing show
+      // when options menu is toggled
+      if (this.isSwiped) {
+        this.isSwiped = false;
+        return;
+      }
       this.el.focus();
     }
   }
