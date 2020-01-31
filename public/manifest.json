@@ -1,6 +1,6 @@
 {
-  "short_name": "Kanban board",
-  "name": "Simple tasks kanban board",
+  "short_name": "Todo board",
+  "name": "Simple tasks board",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,2 +1,2 @@
-# kanban-board
-Simple kanban board with columns and tasks
+# todo-board
+Simple todo board with columns and tasks

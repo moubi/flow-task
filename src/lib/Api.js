@@ -1,6 +1,6 @@
 export default {
   loadColumns: () => {
-    return fetch(`/kanban-board/columns`, {
+    return fetch(`/todo-board/columns`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     })
@@ -10,7 +10,7 @@ export default {
       });
   },
   loadTasks: () => {
-    return fetch(`/kanban-board/tasks`, {
+    return fetch(`/todo-board/tasks`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     })
@@ -20,7 +20,7 @@ export default {
       });
   },
   deleteTask: id => {
-    return fetch(`/kanban-board/tasks/${id}`, {
+    return fetch(`/todo-board/tasks/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" }
     })
@@ -30,7 +30,7 @@ export default {
       });
   },
   updateTask: (id, data) => {
-    return fetch(`/kanban-board/tasks/${id}`, {
+    return fetch(`/todo-board/tasks/${id}`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" }
@@ -41,7 +41,7 @@ export default {
       });
   },
   createTask: id => {
-    return fetch(`/kanban-board/tasks/${id}`, {
+    return fetch(`/todo-board/tasks/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" }
     })
@@ -51,7 +51,7 @@ export default {
       });
   },
   updateColumn: (id, data) => {
-    return fetch(`/kanban-board/columns/${id}`, {
+    return fetch(`/todo-board/columns/${id}`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" }

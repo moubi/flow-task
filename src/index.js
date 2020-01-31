@@ -7,7 +7,7 @@ import App from "./App";
 
 import "./index.scss";
 
-window.kanban_board = store;
+window.todo_board = store;
 
 store.dispatch(bootstrap()).catch(() => {
   // ignore
