@@ -24,6 +24,8 @@ export class Task extends Component {
     this.el = null;
     this.isSwiped = false;
     this.state = {
+      // TODO: may need to cover the case when props.text
+      // changes and need to update the state
       text: props.text,
       isOptionsMenuShown: false
     };
@@ -56,7 +58,6 @@ export class Task extends Component {
 
   shouldComponentUpdate({ text, isDragging }, { isOptionsMenuShown }) {
     if (
-      text !== this.state.text ||
       isOptionsMenuShown !== this.state.isOptionsMenuShown ||
       isDragging !== this.props.isDragging
     ) {
