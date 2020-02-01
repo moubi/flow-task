@@ -5,8 +5,12 @@
 
 @font-face {
     font-family: AvenirNextBold;
-    font-weight: bold;
     src: url("./assets/fonts/AvenirNext/AvenirNextBold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: AvenirNextDemi;
+    src: url("./assets/fonts/AvenirNext/AvenirNextDemi.otf") format("opentype");
 }
 
 body {

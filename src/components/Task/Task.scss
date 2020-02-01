@@ -55,7 +55,8 @@
             width: 80px;
             height: 100%;
             padding-top: 37px;
-            font-size: 12px;
+            font-family: AvenirNextDemi;
+            font-size: 11px;
             text-transform: uppercase;
             color: $surface-color;
             background-repeat: no-repeat;
@@ -71,6 +72,8 @@
         }
 
         &-complete {
+            background-position: center 24%;
+            background-size: 35px 35px;
             background-color: #a0e59c;
             background-image: url("../../assets/checkmark.svg");
         }
