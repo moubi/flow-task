@@ -33,7 +33,7 @@ export class Column extends Component {
           <h2>
             {name} ({count})
           </h2>
-          {isFirstColumn && <i className="plus" onClick={createTaskInColumn} />}
+          {isFirstColumn && <i className="plus" onTouchEnd={createTaskInColumn} />}
         </header>
         {children}
       </div>
