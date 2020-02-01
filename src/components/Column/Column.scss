@@ -1,7 +1,5 @@
 .Column {
-    $surface-color: hsl(0, 0%, 7%); // #121212
-    $elevation-12-color: hsl(0, 0%, 19%);
-
+    $elevation-12-color: hsl(0, 0%, 19%); // 12% elevation
     // TODO: use filter: saturate(-400%); for working
     // with accent colors
 
@@ -22,7 +20,8 @@
         justify-content: space-between;
         height: 36px;
         padding: 5px 10px;
-        border-bottom: 2px solid $surface-color;
+        background-clip: padding-box;
+        border-bottom: 2px solid transparent;
         background-color: $elevation-12-color;
 
         h2 {
