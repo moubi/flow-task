@@ -32,15 +32,18 @@ export const createDeleteTaskAction = updateColumnAction => id => (
       dispatch(deleteTaskSuccess([id]));
       const columnData = getColumnWithRemovedTask(getState(), id);
 
-      return dispatch(updateColumnAction(id, columnData)).then(
-        wasSuccessful => {
-          if (wasSuccessful) {
-            return true;
-          }
+      if (columnData) {
+        return dispatch(updateColumnAction(columnData.id, columnData)).then(
+          wasSuccessful => {
+            if (wasSuccessful) {
+              return true;
+            }
 
-          return false;
-        }
-      );
+            return false;
+          }
+        );
+      }
+      return false;
     },
     error => {
       dispatch(deleteTaskFailure(error));
