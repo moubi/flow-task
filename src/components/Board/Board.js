@@ -42,7 +42,7 @@ export class Board extends Component {
 
   render() {
     const { columns, tasks } = this.props;
-    const haveTasks = Object.keys(tasks).length > 0;
+    const hasTasks = Object.keys(tasks).length > 0;
 
     return (
       <div className="Board">
@@ -58,7 +58,7 @@ export class Board extends Component {
                   innerRef={provided.innerRef}
                   droppableProps={provided.droppableProps}
                 >
-                  {haveTasks &&
+                  {hasTasks &&
                     column.tasks.map(
                       (taskId, taskIndex) =>
                         tasks[taskId] && (
