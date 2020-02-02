@@ -11,13 +11,11 @@
     background-color: $elevation-5-color;
     border-bottom: 2px solid transparent;
     background-clip: padding-box;
-
-    text-align: center;
     overflow: hidden;
 
     &-text {
         width: 100%;
-        margin: 15px 10px 7px 10px;
+        margin: 15px 15px 7px 20px;
         font-size: 16px;
         line-height: 24px;
         color: #fff;
