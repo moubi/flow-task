@@ -1,4 +1,5 @@
 .Column {
+    $surface-color: hsl(0, 0%, 7%);
     $elevation-12-color: hsl(0, 0%, 19%); // 12% elevation
     // TODO: use filter: saturate(-400%); for working
     // with accent colors
@@ -15,6 +16,7 @@
     }
 
     header {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -34,14 +36,20 @@
         }
 
         .plus {
+            position: absolute;
+            top: 0;
+            right: 10px;
             display: inline-block;
-            width: 36px;
-            height: 36px;
+            width: 50px;
+            height: 50px;
             background: url("../../assets/plus.svg");
             background-repeat: no-repeat;
             background-size: 36px 36px;
             background-position: 50% 50%;
+            background-color: #baffb8; // 200 of the Primary color #99ff99
+            border-radius: 50%;
             cursor: pointer;
+            z-index: 1;
         }
     }
 }
