@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createTaskInColumn } from "../../store/actions";
+
 import "./Column.scss";
 
 // TODO: Use selector instead

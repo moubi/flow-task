@@ -56,7 +56,7 @@ export class Task extends Component {
     this.el.removeEventListener("touchmove", preventDefault, false);
   }
 
-  shouldComponentUpdate({ text, isDragging }, { isOptionsMenuShown }) {
+  shouldComponentUpdate({ isDragging }, { isOptionsMenuShown }) {
     if (
       isOptionsMenuShown !== this.state.isOptionsMenuShown ||
       isDragging !== this.props.isDragging
@@ -66,25 +66,20 @@ export class Task extends Component {
     return false;
   }
 
-  showOptionsMenu() {
+  showOptionsMenu(e) {
+    e.stopPropagation();
     this.isSwiped = true;
     this.setState({ isOptionsMenuShown: true });
   }
 
-  hideOptionsMenu() {
+  hideOptionsMenu(e) {
+    e.stopPropagation(e);
     this.isSwiped = true;
     this.setState({ isOptionsMenuShown: false });
   }
 
   handleTap() {
     if (!this.props.isDragging && this.el) {
-      // Do not focus when swipe has taken place
-      // This will prevent virtual keyboard of beeing show
-      // when options menu is toggled
-      if (this.isSwiped) {
-        this.isSwiped = false;
-        return;
-      }
       this.el.focus();
     }
   }
@@ -125,7 +120,7 @@ export class Task extends Component {
           }}
           contentEditable
           onInput={this.handleTextChange}
-          onTouchEnd={this.handleTap}
+          onClick={this.handleTap}
         >
           {text}
         </div>
