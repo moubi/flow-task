@@ -81,9 +81,6 @@ export class Board extends Component {
                                   text={tasks[taskId].text}
                                   // Drag&Drop related props
                                   isDragging={snapshot.isDragging}
-                                  innerRef={provided.innerRef}
-                                  draggableProps={provided.draggableProps}
-                                  dragHandleProps={provided.dragHandleProps}
                                 />
                               </div>
                             )}

@@ -13,10 +13,6 @@ import {
 
 import "./Task.scss";
 
-const preventDefault = e => {
-  e.preventDefault();
-};
-
 export class Task extends Component {
   constructor(props) {
     super(props);
@@ -42,18 +38,11 @@ export class Task extends Component {
   componentDidMount() {
     this.el.addEventListener("swiped-left", this.showOptionsMenu);
     this.el.addEventListener("swiped-right", this.hideOptionsMenu);
-    // Prevent scrolling the whole board when performing swipe on a task
-    // That will completely disable scroll when performing touchmove
-    // FIXME: Event listener could be attached directly to the element in the JSX,
-    // but currently there is a react issue that needs to be fixed first
-    // https://www.chromestatus.com/features/5093566007214080
-    this.el.addEventListener("touchmove", preventDefault, false);
   }
 
   componentWillUnmount() {
     this.el.removeEventListener("swiped-left", this.showOptionsMenu);
     this.el.removeEventListener("swiped-right", this.hideOptionsMenu);
-    this.el.removeEventListener("touchmove", preventDefault, false);
   }
 
   shouldComponentUpdate({ isDragging }, { isOptionsMenuShown }) {
@@ -66,14 +55,12 @@ export class Task extends Component {
     return false;
   }
 
-  showOptionsMenu(e) {
-    e.stopPropagation();
+  showOptionsMenu() {
     this.isSwiped = true;
     this.setState({ isOptionsMenuShown: true });
   }
 
-  hideOptionsMenu(e) {
-    e.stopPropagation(e);
+  hideOptionsMenu() {
     this.isSwiped = true;
     this.setState({ isOptionsMenuShown: false });
   }
