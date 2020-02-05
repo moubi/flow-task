@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import classNames from "classnames";
 import debounce from "lodash/debounce";
 
-import Swipeable from "../Swipeable/Swipeable";
-
 import {
   updateTask,
   deleteTaskAndUpdateColumn,
   completeTask
 } from "../../store/actions";
+
+import Swipeable from "../Swipeable/Swipeable";
 
 import "./Task.scss";
 
@@ -92,6 +92,7 @@ export class Task extends Component {
         })}
       >
         <Swipeable
+          maxDistance={80}
           onSwipeLeft={this.handleSwipeLeft}
           onSwipeRight={this.handleSwipeRight}
         >

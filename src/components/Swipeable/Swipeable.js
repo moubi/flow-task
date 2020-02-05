@@ -19,15 +19,15 @@ export default class Swipeable extends PureComponent {
   }
 
   componentDidMount() {
-    this.el.addEventListener("touchstart", this.handleTouchStart, false);
-    this.el.addEventListener("touchmove", this.handleTouchMove, false);
-    this.el.addEventListener("touchend", this.handleTouchEnd, false);
+    this.el.addEventListener("touchstart", this.handleTouchStart);
+    this.el.addEventListener("touchmove", this.handleTouchMove);
+    this.el.addEventListener("touchend", this.handleTouchEnd);
   }
 
   componentWillUnmount() {
-    this.el.removeEventListener("touchstart", this.handleTouchStart, false);
-    this.el.removeEventListener("touchmove", this.handleTouchMove, false);
-    this.el.removeEventListener("touchend", this.handleTouchEnd, false);
+    this.el.removeEventListener("touchstart", this.handleTouchStart);
+    this.el.removeEventListener("touchmove", this.handleTouchMove);
+    this.el.removeEventListener("touchend", this.handleTouchEnd);
   }
 
   handleTouchStart(e) {
@@ -46,8 +46,6 @@ export default class Swipeable extends PureComponent {
   }
 
   handleTouchEnd(e) {
-    if (this.el !== e.target) return;
-
     const {
       minDistance = 20,
       maxDistance = Infinity,
@@ -64,6 +62,8 @@ export default class Swipeable extends PureComponent {
     // Horizontal swipe
     if (clientXDiffAbs > clientYDiffAbs) {
       if (clientXDiffAbs >= minDistance && clientXDiffAbs <= maxDistance && timeDiff <= timeout) {
+        // Prevent other swipeeables
+        e.stopPropagation();
         if (this.clientXDiff > 0) {
           onSwipeLeft && onSwipeLeft();
         } else {
@@ -73,6 +73,8 @@ export default class Swipeable extends PureComponent {
     // Vertical swipe
     } else {
       if (clientYDiffAbs >= minDistance && clientXDiffAbs <= maxDistance && timeDiff <= timeout) {
+        // Prevent other swipeeables
+        e.stopPropagation();
         if (this.clientYDiff > 0) {
           onSwipeUp && onSwipeUp();
         } else {

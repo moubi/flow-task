@@ -8,6 +8,7 @@
     flex-basis: 0;
     box-sizing: border-box;
     padding: 0 2px;
+    overflow-y: auto;
 
     @media (max-width: 1023px) {
         flex-shrink: 0;
