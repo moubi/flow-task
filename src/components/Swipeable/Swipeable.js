@@ -62,7 +62,7 @@ export default class Swipeable extends PureComponent {
     // Horizontal swipe
     if (clientXDiffAbs > clientYDiffAbs) {
       if (clientXDiffAbs >= minDistance && clientXDiffAbs <= maxDistance && timeDiff <= timeout) {
-        // Prevent other swipeeables
+        // Prevent other swipeables
         e.stopPropagation();
         if (this.clientXDiff > 0) {
           onSwipeLeft && onSwipeLeft();
@@ -73,7 +73,7 @@ export default class Swipeable extends PureComponent {
     // Vertical swipe
     } else {
       if (clientYDiffAbs >= minDistance && clientXDiffAbs <= maxDistance && timeDiff <= timeout) {
-        // Prevent other swipeeables
+        // Prevent other swipeables
         e.stopPropagation();
         if (this.clientYDiff > 0) {
           onSwipeUp && onSwipeUp();
