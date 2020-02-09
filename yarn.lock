@@ -9522,11 +9522,6 @@ svgo@^1.0.0, svgo@^1.2.2:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-swiped-events@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/swiped-events/-/swiped-events-1.0.9.tgz#a574cff2001068c245ef8e998aba21bb9bd87798"
-  integrity sha512-dJGHuveSD6VY2V/44ttKFTRAxRtgqYXLraKSqlIPsvdRxwP4fnpqMulMbV+9umGBFndApgrkzmi4MZv/V5rmuQ==
-
 symbol-observable@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"

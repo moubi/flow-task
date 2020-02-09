@@ -2,11 +2,13 @@
     // The surface color is #121212 or hsl(0, 0%, 7%)
     $surface-color: hsl(0, 0%, 7%);
 
+    // Fix to disable horizontal scroll
+    position: fixed;
     display: flex;
+    width: 300%;    // 100% * number of columns
     height: 100%;
     align-items: stretch;
     background-color: $surface-color;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
+    left: 0;
 }

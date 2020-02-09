@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classNames from "classnames";
 import debounce from "lodash/debounce";
-import "swiped-events";
 
 import {
   updateTask,
   deleteTaskAndUpdateColumn,
   completeTask
 } from "../../store/actions";
+
+import Swipeable from "../Swipeable/Swipeable";
 
 import "./Task.scss";
 
@@ -30,19 +31,9 @@ export class Task extends Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
-    this.showOptionsMenu = this.showOptionsMenu.bind(this);
-    this.hideOptionsMenu = this.hideOptionsMenu.bind(this);
+    this.handleSwipeLeft = this.handleSwipeLeft.bind(this);
+    this.handleSwipeRight = this.handleSwipeRight.bind(this);
     this.updateTask = debounce(props.updateTask, 500);
-  }
-
-  componentDidMount() {
-    this.el.addEventListener("swiped-left", this.showOptionsMenu);
-    this.el.addEventListener("swiped-right", this.hideOptionsMenu);
-  }
-
-  componentWillUnmount() {
-    this.el.removeEventListener("swiped-left", this.showOptionsMenu);
-    this.el.removeEventListener("swiped-right", this.hideOptionsMenu);
   }
 
   shouldComponentUpdate({ isDragging }, { isOptionsMenuShown }) {
@@ -55,12 +46,12 @@ export class Task extends Component {
     return false;
   }
 
-  showOptionsMenu() {
+  handleSwipeLeft() {
     this.isSwiped = true;
     this.setState({ isOptionsMenuShown: true });
   }
 
-  hideOptionsMenu() {
+  handleSwipeRight() {
     this.isSwiped = true;
     this.setState({ isOptionsMenuShown: false });
   }
@@ -85,7 +76,7 @@ export class Task extends Component {
 
   handleComplete() {
     this.props.completeTask(this.props.id);
-    this.hideOptionsMenu();
+    this.handleSwipeRight();
   }
 
   render() {
@@ -100,17 +91,26 @@ export class Task extends Component {
           "Task--isOptionsMenuShown": isOptionsMenuShown
         })}
       >
-        <div
-          className="Task-text"
-          ref={el => {
-            this.el = el;
-          }}
-          contentEditable
-          onInput={this.handleTextChange}
-          onClick={this.handleTap}
+        <Swipeable
+          maxDistance={90}
+          onSwipeLeft={this.handleSwipeLeft}
+          onSwipeRight={this.handleSwipeRight}
         >
-          {text}
-        </div>
+          {innerRef => (
+            <div
+              className="Task-text"
+              ref={el => {
+                this.el = el;
+                innerRef(el);
+              }}
+              contentEditable
+              onInput={this.handleTextChange}
+              onClick={this.handleTap}
+            >
+              {text}
+            </div>
+          )}
+        </Swipeable>
         <div className="Task-options">
           <span className="Task-options-complete" onClick={this.handleComplete}>
             complete
