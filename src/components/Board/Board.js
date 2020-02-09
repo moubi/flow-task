@@ -17,7 +17,12 @@ const stopImmediatePropagation = e => {
   e.stopImmediatePropagation();
 };
 
-const getColumnIndexAtPosition = scrollX => Math.floor(scrollX/VIEWPORT_WIDTH)
+const getColumnIndexAtPosition = scrollX => Math.floor(Math.abs(scrollX)/VIEWPORT_WIDTH)
+
+const getColumnTransitionStyle = columnIndex => ({
+  left: columnIndex * -VIEWPORT_WIDTH + "px",
+  transition: "left 0.2s ease-in"
+});
 
 export class Board extends Component {
   constructor(props) {
@@ -65,14 +70,13 @@ export class Board extends Component {
 
   handleSwipeLeft() {
     const { swipeStyle } = this.state;
-    const columnIndexInView = getColumnIndexAtPosition(Math.abs(parseInt(swipeStyle.left)));
+    const columnIndexInView = getColumnIndexAtPosition(parseInt(swipeStyle.left));
 
     if (columnIndexInView < 2) {
       this.setState({
         swipeStyle: {
           ...swipeStyle,
-          left: (columnIndexInView + 1) * -VIEWPORT_WIDTH + "px",
-          transition: "left 0.2s ease-in"
+          ...getColumnTransitionStyle(columnIndexInView + 1)
         }
       });
     }
@@ -86,8 +90,7 @@ export class Board extends Component {
       this.setState({
         swipeStyle: {
           ...swipeStyle,
-          left: (columnIndexInView - 1) * -VIEWPORT_WIDTH + "px",
-          transition: "left 0.2s ease-in"
+          ...getColumnTransitionStyle(columnIndexInView - 1)
         }
       });
     }
