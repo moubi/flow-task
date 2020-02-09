@@ -21,7 +21,7 @@ const getColumnIndexAtPosition = scrollX => Math.floor(Math.abs(scrollX)/VIEWPOR
 
 const getColumnTransitionStyle = columnIndex => ({
   left: columnIndex * -VIEWPORT_WIDTH + "px",
-  transition: "left 0.2s ease-in"
+  transition: "left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)"
 });
 
 export class Board extends Component {
@@ -116,7 +116,7 @@ export class Board extends Component {
 
     return (
       <Swipeable
-        minDistance={80}
+        minDistance={100}
         onSwipeLeft={this.handleSwipeLeft}
         onSwipeRight={this.handleSwipeRight}
       >

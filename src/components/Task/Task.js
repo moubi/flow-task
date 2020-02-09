@@ -92,7 +92,7 @@ export class Task extends Component {
         })}
       >
         <Swipeable
-          maxDistance={80}
+          maxDistance={90}
           onSwipeLeft={this.handleSwipeLeft}
           onSwipeRight={this.handleSwipeRight}
         >
