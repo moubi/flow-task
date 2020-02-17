@@ -9,9 +9,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const DB = {
-  path: "src/db/",
-  columns: "src/db/columns.json",
-  tasks: "src/db/tasks.json"
+  path: "db/",
+  columns: "db/columns.json",
+  tasks: "db/tasks.json"
 };
 
 app.get("/todo-board", function(req, res) {
