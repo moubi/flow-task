@@ -14,36 +14,21 @@ const DB = {
   tasks: "db/tasks.json"
 };
 
-app.get("/todo-board", function(req, res) {
-  const columnsData = fs.readFileSync(DB.columns);
-  const tasksData = fs.readFileSync(DB.tasks);
-  const columnsJSON = JSON.parse(columnsData);
-  const tasksJSON = JSON.parse(tasksData);
-  const data = Object.assign({}, columnsJSON, tasksJSON);
-
-  return res.send(data);
-});
-
-// TODO: need a fix to work with columns and tasks DBs
-app.post("/todo-board", function(req, res) {
-  const columnData = JSON.stringify(req.body.columns);
-  const tasksData = JSON.stringify(req.body.tasks);
-
-  return fs.writeFile(DB.columns, columnData, err => {
-    if (err) throw err;
-
-    return fs.writeFile(DB.tasks, tasksData, err => {
-      if (err) throw err;
-      return res.send(req.body);
-    });
-  });
-});
-
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.post("/todo-board/columns/:id", function(req, res) {
+app.get("/columns", function(req, res) {
+  const columnsData = fs.readFileSync(DB.columns);
+  return res.send(JSON.parse(columnsData));
+});
+
+app.get("/tasks", function(req, res) {
+  const tasksData = fs.readFileSync(DB.tasks);
+  return res.send(JSON.parse(tasksData));
+});
+
+app.post("/columns/:id", function(req, res) {
   const columnId = req.params.id;
   const columnJSON = req.body;
   const rawdata = fs.readFileSync(DB.columns);
@@ -58,12 +43,7 @@ app.post("/todo-board/columns/:id", function(req, res) {
   });
 });
 
-app.get("/todo-board/columns", function(req, res) {
-  const columnsData = fs.readFileSync(DB.columns);
-  return res.send(JSON.parse(columnsData));
-});
-
-app.post("/todo-board/tasks/:id", function(req, res) {
+app.post("/tasks/:id", function(req, res) {
   const taskId = req.params.id;
   const taskJSON = req.body;
   const rawdata = fs.readFileSync(DB.tasks);
@@ -78,7 +58,7 @@ app.post("/todo-board/tasks/:id", function(req, res) {
   });
 });
 
-app.delete("/todo-board/tasks/:id", function(req, res) {
+app.delete("/tasks/:id", function(req, res) {
   const taskId = req.params.id;
   const rawdata = fs.readFileSync(DB.tasks);
   const data = JSON.parse(rawdata);
@@ -90,7 +70,7 @@ app.delete("/todo-board/tasks/:id", function(req, res) {
   });
 });
 
-app.put("/todo-board/tasks/:id", function(req, res) {
+app.put("/tasks/:id", function(req, res) {
   const taskId = req.params.id;
   const rawdata = fs.readFileSync(DB.tasks);
   const data = JSON.parse(rawdata);
@@ -105,9 +85,6 @@ app.put("/todo-board/tasks/:id", function(req, res) {
   });
 });
 
-app.get("/todo-board/tasks", function(req, res) {
-  const tasksData = fs.readFileSync(DB.tasks);
-  return res.send(JSON.parse(tasksData));
-});
-
 app.listen(process.env.PORT || 8080);
+
+// module.exports = app;
