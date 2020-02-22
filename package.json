@@ -28,8 +28,7 @@
   },
   "scripts": {
     "client": "PORT=3002 react-scripts start",
-    "server": "node server.js",
-    "start": "concurrently 'npm run server' 'npm run client'",
+    "start": "npm run client",
     "build": "react-scripts build && yarn build:php",
     "build:php": "mv build/index.html build/index.php && cp -R api build/ && cp -R db build/",
     "test": "react-scripts test",

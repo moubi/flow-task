@@ -20,7 +20,7 @@ export default {
       });
   },
   deleteTask: id => {
-    return fetch(`api/tasks/${id}`, {
+    return fetch(`api/tasks?id=${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" }
     })
@@ -30,7 +30,7 @@ export default {
       });
   },
   updateTask: (id, data) => {
-    return fetch(`api/tasks/${id}`, {
+    return fetch(`api/tasks?id=${id}`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" }

@@ -10,22 +10,19 @@
     parse_str($_SERVER["QUERY_STRING"], $urlParams);
     $columnId = $urlParams["id"];
     $columnJSON = file_get_contents("php://input");
-    $rawData = file_get_contents(COLUMNS_TABLE);
-    $data = json_decode($rawdata);
-
-    var_dump($rawdata);
+    $data = json_decode(file_get_contents(COLUMNS_TABLE));
 
     // Converting in order to set the prop
-    // $data = (array)$data;
-    // if ($data[$columnId]) {
-    //   $data[$columnId] = json_decode($columnJSON);
-    // }
-    // $data = (object)$data;
+    $data = (array)$data;
+    if ($data[$columnId]) {
+      $data[$columnId] = json_decode($columnJSON);
+    }
+    $data = (object)$data;
 
-    // $table = fopen(COLUMNS_TABLE, "w");
-    // fwrite($table, json_encode($data));
-    // fclose($table);
+    $table = fopen(COLUMNS_TABLE, "w");
+    fwrite($table, json_encode($data));
+    fclose($table);
 
-    // echo json_encode($data);
+    echo json_encode($data);
   }
 ?>
