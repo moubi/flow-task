@@ -1,6 +1,6 @@
 export default {
   loadColumns: () => {
-    return fetch(`api/columns`, {
+    return fetch(`api/columns/`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     })
@@ -10,7 +10,7 @@ export default {
       });
   },
   loadTasks: () => {
-    return fetch(`api/tasks`, {
+    return fetch(`api/tasks/`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     })
@@ -20,7 +20,7 @@ export default {
       });
   },
   deleteTask: id => {
-    return fetch(`api/tasks?id=${id}`, {
+    return fetch(`api/tasks/?id=${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" }
     })
@@ -30,7 +30,7 @@ export default {
       });
   },
   updateTask: (id, data) => {
-    return fetch(`api/tasks?id=${id}`, {
+    return fetch(`api/tasks/?id=${id}`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" }
@@ -41,7 +41,7 @@ export default {
       });
   },
   createTask: id => {
-    return fetch(`api/tasks?id=${id}`, {
+    return fetch(`api/tasks/?id=${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" }
     })
@@ -51,7 +51,7 @@ export default {
       });
   },
   updateColumn: (id, data) => {
-    return fetch(`api/columns?id=${id}`, {
+    return fetch(`api/columns/?id=${id}`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" }
