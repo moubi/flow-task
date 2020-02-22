@@ -5,6 +5,8 @@
   "author": "Miroslav Nikolov",
   "license": "MIT",
   "dependencies": {
+    "concurrently": "^4.1.2",
+    "express": "4.17.1",
     "lodash": "^4.17.15",
     "node-sass": "^4.13.1",
     "react": "^16.13.0",
@@ -28,8 +30,9 @@
   },
   "scripts": {
     "client": "PORT=3002 react-scripts start",
-    "start": "npm run client",
-    "build": "react-scripts build",
+    "server": "node server.js",
+    "start": "concurrently 'npm run server' 'npm run client'",
+    "build": "react-scripts build && cp ./server.js ./build/ && cp -a ./db ./build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
