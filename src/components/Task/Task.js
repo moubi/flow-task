@@ -59,6 +59,9 @@ export class Task extends Component {
   handleTap() {
     if (!this.props.isDragging && this.el) {
       this.el.focus();
+      // Move cursor to the end
+      document.execCommand("selectAll", false, null);
+      document.getSelection().collapseToEnd();
     }
   }
 
