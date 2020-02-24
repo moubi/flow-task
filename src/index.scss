@@ -25,6 +25,9 @@ html, body {
 }
 
 #root {
+    $surface-color: hsl(0, 0%, 7%);
     height: 100%;
     width: 100%;
+    // The surface color is #121212 or hsl(0, 0%, 7%)
+    background-color: $surface-color;
 }
