@@ -4,8 +4,6 @@
   "homepage": ".",
   "private": true,
   "dependencies": {
-    "concurrently": "^4.1.2",
-    "express": "4.17.1",
     "lodash": "^4.17.15",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
@@ -22,8 +20,7 @@
   },
   "scripts": {
     "client": "PORT=3002 react-scripts start",
-    "server": "node server.js",
-    "start": "concurrently 'npm run server' 'npm run client'",
+    "start": "npm run client",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
