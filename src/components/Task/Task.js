@@ -108,7 +108,7 @@ export class Task extends Component {
               }}
               contentEditable
               onInput={this.handleTextChange}
-              onClick={this.handleTap}
+              onTouchEnd={this.handleTap}
             >
               {text}
             </div>
