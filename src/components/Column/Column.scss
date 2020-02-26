@@ -8,12 +8,18 @@
     flex-basis: 0;
     box-sizing: border-box;
     padding: 0 2px;
-    overflow-y: auto;
 
     @media (max-width: 1023px) {
         flex-shrink: 0;
         // iPhone 5SE screen width
         flex-basis: 320px;
+    }
+
+    &-body {
+        // TODO: find a better way to determine height (flex?)
+        height: calc(100% - 48px);
+        overflow-y: auto;
+        box-sizing: border-box;
     }
 
     header {
