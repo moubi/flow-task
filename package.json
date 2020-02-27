@@ -16,7 +16,13 @@
   },
   "devDependencies": {
     "classnames": "2.2.5",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "sinon": "9.0.0",
+    "unexpected-sinon": "^10.11.2",
+    "unexpected": "^11.0.1",
+    "unexpected-dom": "^4.11.1",
+    "unexpected-reaction": "^2.6.0",
+    "react-dom-testing": "^1.5.0"
   },
   "scripts": {
     "client": "PORT=3002 react-scripts start",
