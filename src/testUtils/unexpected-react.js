@@ -6,7 +6,7 @@ import React, { Component } from "react";
 import unexpectedSinon from "unexpected-sinon";
 import PropTypes from "prop-types";
 
-import FakeReduxProvider from "./FakeReduxProvider/FakeReduxProvider";
+import FakeReduxProvider from "./FakeReduxProvider";
 
 const expect = unexpected
   .clone()
