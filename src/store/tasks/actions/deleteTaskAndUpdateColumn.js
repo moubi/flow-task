@@ -1,5 +1,5 @@
 import { createAction, createErrorAction } from "../../utils";
-import { updateColumn } from "../../actions";
+import { updateColumn } from "../../columns/actions/updateColumn";
 import { getColumnByTaskId } from "../../selectors";
 
 import {
