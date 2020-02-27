@@ -1,3 +1,4 @@
+// Based on https://github.com/john-doherty/swiped-events
 import { PureComponent } from "react";
 import PropTypes from "prop-types";
 
