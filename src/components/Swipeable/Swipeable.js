@@ -61,7 +61,11 @@ export default class Swipeable extends PureComponent {
 
     // Horizontal swipe
     if (clientXDiffAbs > clientYDiffAbs) {
-      if (clientXDiffAbs >= minDistance && clientXDiffAbs <= maxDistance && timeDiff <= timeout) {
+      if (
+        clientXDiffAbs >= minDistance &&
+        clientXDiffAbs <= maxDistance &&
+        timeDiff <= timeout
+      ) {
         // Prevent other swipeables
         e.stopPropagation();
         if (this.clientXDiff > 0) {
@@ -70,9 +74,13 @@ export default class Swipeable extends PureComponent {
           onSwipeLeft && onSwipeRight();
         }
       }
-    // Vertical swipe
+      // Vertical swipe
     } else {
-      if (clientYDiffAbs >= minDistance && clientXDiffAbs <= maxDistance && timeDiff <= timeout) {
+      if (
+        clientYDiffAbs >= minDistance &&
+        clientXDiffAbs <= maxDistance &&
+        timeDiff <= timeout
+      ) {
         // Prevent other swipeables
         e.stopPropagation();
         if (this.clientYDiff > 0) {
@@ -95,7 +103,7 @@ export default class Swipeable extends PureComponent {
       this.el = el;
     });
   }
-};
+}
 
 Swipeable.propTypes = {
   children: PropTypes.func.isRequired,
