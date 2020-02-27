@@ -19,7 +19,6 @@ export class Task extends Component {
     super(props);
 
     this.el = null;
-    this.isSwiped = false;
     this.state = {
       // TODO: may need to cover the case when props.text
       // changes and need to update the state
@@ -47,12 +46,10 @@ export class Task extends Component {
   }
 
   handleSwipeLeft() {
-    this.isSwiped = true;
     this.setState({ isOptionsMenuShown: true });
   }
 
   handleSwipeRight() {
-    this.isSwiped = true;
     this.setState({ isOptionsMenuShown: false });
   }
 
@@ -75,6 +72,7 @@ export class Task extends Component {
 
   handleDelete() {
     this.props.deleteTaskAndUpdateColumn(this.props.id);
+    this.handleSwipeRight();
   }
 
   handleComplete() {
