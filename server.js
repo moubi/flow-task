@@ -72,12 +72,13 @@ app.delete("/tasks/:id", function(req, res) {
 
 app.put("/tasks/:id", function(req, res) {
   const taskId = req.params.id;
+  const taskJSON = req.body;
   const rawdata = fs.readFileSync(DB.tasks);
   const data = JSON.parse(rawdata);
-  data[taskId] = {
-    id: taskId,
-    text: ""
-  };
+
+  if (taskId) {
+    data[taskId] = taskJSON;
+  }
 
   return fs.writeFile(DB.tasks, JSON.stringify(data), err => {
     if (err) throw err;
@@ -86,5 +87,3 @@ app.put("/tasks/:id", function(req, res) {
 });
 
 app.listen(process.env.PORT || 8080);
-
-// module.exports = app;
