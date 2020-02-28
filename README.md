@@ -3,7 +3,7 @@ Simple todo board for your mobile browser. Written in **React** using [create-re
 
 ## Support
 
-Though, it implements some nice ideas on UI and interactions, the board was initially intended to serve personal goals and therefore developed and tested in _**latest iOS Safari**_ (iPhone SE).
+Though, it implements several interesting UI ideas and interactions, the board was initially intended to serve personal goals and developed for _**latest iOS Safari**_ (iPhone SE).
 
 ## Getting started
 
@@ -14,9 +14,9 @@ yarn
 yarn start
 ```
 
-That's it. Navigate to http://localhost:3002 and view the board with example data.
+That's it. Navigating to http://localhost:3002 will bring the board with example data.
 
-### Before installation
+### Prior to installation
 
 The project is built with node version **10.15.1**. This is set in the `.nvmrc` file. You may need to additionally install it on your development machine using `nvm`:
 ```
@@ -26,7 +26,7 @@ nvm use
 
 ## Backend integration
 
-`master` branch represents pure frontend using _**localStorage database**_ for columns and tasks data. There are, though, two backend integrations for deployment on php and node enabled hostings.
+`master` branch represents pure frontend app that uses _**localStorage database**_ for columns and tasks data. There are also two backend integrations for deployment on php and node enabled hostings.
 
  - Php ([feature/php-backend](https://github.com/moubi/todo-board/tree/feature/php-server) branch)
  - Node ([feature/node-backend](https://github.com/moubi/todo-board/tree/feature/node-server) branch)
