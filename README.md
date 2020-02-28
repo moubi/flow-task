@@ -1,13 +1,12 @@
-# Todo board for touch
+# Todo board for mobile
 Simple todo board for your mobile browser. Written in **React** using [create-react-app](https://github.com/facebook/create-react-app).
 
 ## Support
 
-Though, it contains some nice ideas in terms of UI and interactions, the board was initially intended to serve personal goals and therefore developed and tested in _**latest iOS Safari**_.
+Though, it implements some nice ideas on UI and interactions, the board was initially intended to serve personal goals and therefore developed and tested in _**latest iOS Safari**_ (iPhone SE).
 
 ## Getting started
 
-Open your terminal and go to your projects folder
 ```
 git clone git@github.com:moubi/todo-board.git
 cd todo-board/
@@ -15,7 +14,7 @@ yarn
 yarn start
 ```
 
-That's it. Navigate to http://localhost:3002 and view the board filled with some example data.
+That's it. Navigate to http://localhost:3002 and view the board with example data.
 
 ### Before installation
 
@@ -27,10 +26,10 @@ nvm use
 
 ## Backend integration
 
-All the code under the `master` branch is pure frontend using _**localStorage database**_ to store columns and tasks data. There are, though, two backend integrations for deployment on a php or node enabled hosting.
+`master` branch represents pure frontend using _**localStorage database**_ for columns and tasks data. There are, though, two backend integrations for deployment on php and node enabled hostings.
 
- - Php backend (in [feature/php-backend](https://github.com/moubi/todo-board/tree/feature/php-server) branch)
- - Node backend (in [feature/node-backend](https://github.com/moubi/todo-board/tree/feature/node-server) branch)
+ - Php ([feature/php-backend](https://github.com/moubi/todo-board/tree/feature/php-server) branch)
+ - Node ([feature/node-backend](https://github.com/moubi/todo-board/tree/feature/node-server) branch)
 
 Check corresponding READMEs for more info.
 
