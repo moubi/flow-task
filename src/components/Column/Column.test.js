@@ -54,9 +54,16 @@ describe("Column", () => {
       style: { width: "100px" }
     };
 
-    return expect(<Column {...props} />, "when mounted", "to have attributes", {
-      style: "width: 100px"
-    });
+    return expect(
+      <Column {...props} />,
+      "when mounted",
+      "queried for first",
+      ".Column-body",
+      "to have attributes",
+      {
+        style: "width: 100px"
+      }
+    );
   });
 
   it("should render with children", () => {

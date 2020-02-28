@@ -27,8 +27,6 @@ export class Column extends Component {
         id={id}
         name={name}
         className="Column"
-        ref={innerRef}
-        {...droppableProps}
       >
         <header>
           <h2>
@@ -38,7 +36,13 @@ export class Column extends Component {
             <i className="Column-plus" onTouchEnd={createTaskInColumn} />
           )}
         </header>
-        <div className="Column-body">{children}</div>
+        <div
+          className="Column-body"
+          ref={innerRef}
+          {...droppableProps}
+        >
+          {children}
+        </div>
       </div>
     );
   }
