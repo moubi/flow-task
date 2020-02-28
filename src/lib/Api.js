@@ -1,58 +1,85 @@
 const appName = "Todo board";
 const columns = {
   "d1ea1845-86e2-4c46-976c-8b09ba4786e5": {
-    "id": "d1ea1845-86e2-4c46-976c-8b09ba4786e5",
-    "name": "To do",
-    "tasks": ["a58180ff-2bbf-4327-88a5-1158ea0f50c2", "a58180ff-2bbf-4327-88a5-1158ea0f50c7", "358180ff-2bbf-4327-88a5-1158ea0f50a7", "058180cf-2bbf-4327-88a5-1158ea0f5000", "958180cf-2bbf-4327-88a5-1158ea0f5003", "158180cf-2bbf-4327-88a5-1158ea0f5032", "f58180cf-2bbf-4327-88a5-1158ea0f50aa"]
+    id: "d1ea1845-86e2-4c46-976c-8b09ba4786e5",
+    name: "To do",
+    tasks: [
+      "a58180ff-2bbf-4327-88a5-1158ea0f50c2",
+      "a58180ff-2bbf-4327-88a5-1158ea0f50c7",
+      "358180ff-2bbf-4327-88a5-1158ea0f50a7",
+      "058180cf-2bbf-4327-88a5-1158ea0f5000",
+      "958180cf-2bbf-4327-88a5-1158ea0f5003",
+      "158180cf-2bbf-4327-88a5-1158ea0f5032",
+      "f58180cf-2bbf-4327-88a5-1158ea0f50aa"
+    ]
   },
   "200c95b8-d2f7-4173-b086-33be8ade92b0": {
-    "id": "200c95b8-d2f7-4173-b086-33be8ade92b0",
-    "name": "Doing",
-    "tasks": ["e58180cf-2bbf-4327-88a5-1158ea0f50bb", "058180cf-2bbf-4327-88a5-1158ea0f50cc"]
+    id: "200c95b8-d2f7-4173-b086-33be8ade92b0",
+    name: "Doing",
+    tasks: [
+      "e58180cf-2bbf-4327-88a5-1158ea0f50bb",
+      "058180cf-2bbf-4327-88a5-1158ea0f50cc"
+    ]
   },
   "24f4dcf8-b471-488c-a1be-b56ea116e712": {
-    "id": "24f4dcf8-b471-488c-a1be-b56ea116e712",
-    "name": "Done",
-    "tasks": ["c58180cf-2bbf-4327-88a5-1158ea0f50aa", "b58180cf-2bbf-4327-88a5-1158ea0f5097", "858180cf-2bbf-4327-88a5-1158ea0f5015"]
+    id: "24f4dcf8-b471-488c-a1be-b56ea116e712",
+    name: "Done",
+    tasks: [
+      "c58180cf-2bbf-4327-88a5-1158ea0f50aa",
+      "b58180cf-2bbf-4327-88a5-1158ea0f5097",
+      "858180cf-2bbf-4327-88a5-1158ea0f5015"
+    ]
   }
 };
 
 const tasks = {
   "a58180ff-2bbf-4327-88a5-1158ea0f50c2": {
-    "text": "Buy some swedish cakes"
+    text: "Buy some swedish cakes",
+    lastModifiedDate: 1582900781820
   },
   "a58180ff-2bbf-4327-88a5-1158ea0f50c7": {
-    "text": "Meeting with Steven about his new business idea"
+    text: "Meeting with Steven about his new business idea",
+    lastModifiedDate: 1582900781821
   },
   "358180ff-2bbf-4327-88a5-1158ea0f50a7": {
-    "text": "Rewrite Swipeable plugin with React Hooks"
+    text: "Rewrite Swipeable plugin with React Hooks",
+    lastModifiedDate: 1582900781822
   },
   "058180cf-2bbf-4327-88a5-1158ea0f5000": {
-    "text": "Try this new pancackes recepy that everyone is talking about"
+    text: "Try this new pancackes recepy that everyone is talking about",
+    lastModifiedDate: 1582900781823
   },
   "958180cf-2bbf-4327-88a5-1158ea0f5003": {
-    "text": "Doctor appointment at 8:30"
+    text: "Doctor appointment at 8:30",
+    lastModifiedDate: 15829007818324
   },
   "158180cf-2bbf-4327-88a5-1158ea0f5032": {
-    "text": "Check how is your old friend Bob doing"
+    text: "Check how is your old friend Bob doing",
+    lastModifiedDate: 1582900781825
   },
   "f58180cf-2bbf-4327-88a5-1158ea0f50aa": {
-    "text": "Go to the bank and create a new $$ account with Mastercard"
+    text: "Go to the bank and create a new $$ account with Mastercard",
+    lastModifiedDate: 1582900781826
   },
   "e58180cf-2bbf-4327-88a5-1158ea0f50bb": {
-    "text": "Look for a good iPhone offer online"
+    text: "Look for a good iPhone offer online",
+    lastModifiedDate: 1582900781827
   },
   "058180cf-2bbf-4327-88a5-1158ea0f50cc": {
-    "text": "Throw away this old printer that served well, though"
+    text: "Throw away this old printer that served well, though",
+    lastModifiedDate: 1582900781828
   },
   "c58180cf-2bbf-4327-88a5-1158ea0f50aa": {
-    "text": "Buy new shoes"
+    text: "Buy new shoes",
+    lastModifiedDate: 1582900781829
   },
   "b58180cf-2bbf-4327-88a5-1158ea0f5097": {
-    "text": "Prepare for the PMP exam next week"
+    text: "Prepare for the PMP exam next week",
+    lastModifiedDate: 1582900781830
   },
   "858180cf-2bbf-4327-88a5-1158ea0f5015": {
-    "text": "Be at home on Thursday when the delivery from Amazon is expected"
+    text: "Be at home on Thursday when the delivery from Amazon is expected",
+    lastModifiedDate: 1582900781831
   }
 };
 
@@ -60,7 +87,7 @@ const setDefaultDataIfNotPresent = () => {
   if (!window.localStorage.getItem(appName)) {
     window.localStorage.setItem(appName, JSON.stringify({ columns, tasks }));
   }
-}
+};
 setDefaultDataIfNotPresent();
 
 const getColumnsData = () => {
@@ -107,12 +134,14 @@ export default {
 
     return Promise.resolve(tasks);
   },
-  createTask: id => {
+  createTask: data => {
     const tasks = getTasksData();
-    tasks[id] = { id, text: "" };
-    setTasksData(tasks);
+    if (data.id) {
+      tasks[data.id] = data;
+      setTasksData(tasks);
+    }
 
-    return Promise.resolve(tasks[id]);
+    return Promise.resolve(tasks[data.id]);
   },
   updateColumn: (id, data) => {
     const columns = getColumnsData();

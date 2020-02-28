@@ -13,12 +13,17 @@ const createTaskFailure = createErrorAction(CREATE_TASK_FAILURE);
 
 export const createTask = () => (dispatch, getState, api) => {
   dispatch(createTaskRequest());
-  const taskId = uuid();
+  const id = uuid();
+  const newTask = {
+    id,
+    text: "",
+    lastModifiedDate: Date.now()
+  };
 
-  return api.createTask(taskId).then(
+  return api.createTask(newTask).then(
     data => {
       dispatch(createTaskSuccess(data));
-      return taskId;
+      return id;
     },
     error => {
       dispatch(createTaskFailure(error));
