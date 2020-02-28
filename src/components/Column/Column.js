@@ -35,7 +35,7 @@ export class Column extends Component {
             {name} ({count})
           </h2>
           {isFirstColumn && (
-            <i className="plus" onTouchEnd={createTaskInColumn} />
+            <i className="Column-plus" onTouchEnd={createTaskInColumn} />
           )}
         </header>
         <div className="Column-body">{children}</div>
@@ -48,10 +48,10 @@ Column.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
-  shouldHaveAddIcon: PropTypes.bool,
   droppableProps: PropTypes.object.isRequired,
   innerRef: PropTypes.func.isRequired,
-  createTaskInColumn: PropTypes.func.isRequired
+  createTaskInColumn: PropTypes.func.isRequired,
+  children: PropTypes.node
 };
 
 export default connect(null, {
