@@ -34,9 +34,10 @@ export default {
       .then(response => response.json())
       .then(data => Promise.resolve(data));
   },
-  createTask: id => {
-    return fetch(`api/tasks/?id=${id}`, {
+  createTask: data => {
+    return fetch(`api/tasks/?id=${data.id}`, {
       method: "PUT",
+      body: JSON.stringify(data),
       headers
     })
       .then(response => response.json())
