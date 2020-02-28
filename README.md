@@ -32,7 +32,7 @@ All the code under the `master` branch is pure frontend using _**localStorage da
  - Php backend (in [feature/php-backend](https://github.com/moubi/todo-board/tree/feature/php-server) branch)
  - Node backend (in [feature/node-backend](https://github.com/moubi/todo-board/tree/feature/node-server) branch)
 
-Check their corresponding READMEs for more info.
+Check corresponding READMEs for more info.
 
 ## Tests
 
@@ -72,7 +72,7 @@ yarn build
 
 All the production files are then stored in the `build/` folder.
 
-Refer to the corresponding guides on how to create production builds for the app with [node](https://github.com/moubi/todo-board/tree/feature/node-server) or [php](https://github.com/moubi/todo-board/tree/feature/php-server) backend.
+[Node](https://github.com/moubi/todo-board/tree/feature/node-server) and [php](https://github.com/moubi/todo-board/tree/feature/php-server) backends have their own build process.
 
 ## Contributing
 Any help related to Android support, bug fixes, new features or even a desktop version is welcome.
