@@ -33,6 +33,14 @@ nvm use
 
 Check corresponding READMEs for more info.
 
+## Few UI goodies
+
+As mentioned earlier there are few interesting ideas while trying to achieve native like behavior.
+
+Making swipe events and drag&drop working together is a challenge. Things become even harder when there are multiple UI elements reacting on swiping.
+
+Let's take a look at some examples:
+
 ## Tests
 
 Trigger the test suite by
@@ -43,23 +51,7 @@ yarn test
 
 Tests cover all the components, reducers and actions. Each test (`*.test.js`) is placed next to its target file.
 
-There is an extensive use of the [unexpected](https://github.com/unexpectedjs/unexpected) library and its supportive modules for testing. Thanks to that writing tests is simple as:
-```jsx
-it("should render default", () => {
-  return expect(
-    <Task {...props} />,
-    "when mounted",
-    "to exhaustively satisfy",
-    <div id="1" className="Task">
-      <div className="Task-text" contentEditable />
-      <div className="Task-options">
-        <span className="Task-options-complete">complete</span>
-        <span className="Task-options-delete">delete</span>
-      </div>
-    </div>
-  );
-});
-```
+There is an extensive use of the [unexpected](https://github.com/unexpectedjs/unexpected) library and its supportive modules for testing.
 
 ## Deployment
 
