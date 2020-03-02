@@ -60,7 +60,7 @@ export class Board extends Component {
 
       moveTask(draggedTaskId, destinationColumnId, destination.index);
     }
-
+    console.log(window.scrollX);
     this.setState({
       swipeStyle: {
         position: "fixed",
@@ -71,9 +71,8 @@ export class Board extends Component {
 
   handleSwipeLeft() {
     const { swipeStyle } = this.state;
-    const columnIndexInView = getColumnIndexAtPosition(
-      parseInt(swipeStyle.left)
-    );
+    const left = parseInt(swipeStyle.left);
+    let columnIndexInView = getColumnIndexAtPosition(left);
 
     if (columnIndexInView < 2) {
       this.setState({
@@ -87,9 +86,15 @@ export class Board extends Component {
 
   handleSwipeRight() {
     const { swipeStyle } = this.state;
-    const columnIndexInView = getColumnIndexAtPosition(
-      Math.abs(parseInt(swipeStyle.left))
-    );
+    const left = Math.abs(parseInt(swipeStyle.left));
+    let columnIndexInView = getColumnIndexAtPosition(left);
+    const isInTheMiddleOfTwoColumns = !Number.isInteger(left / VIEWPORT_WIDTH);
+
+    if (isInTheMiddleOfTwoColumns) {
+      // If we are in the middle of two columns
+      // set the view to the one on the right
+      columnIndexInView = columnIndexInView + 1;
+    }
 
     if (columnIndexInView > 0) {
       this.setState({
