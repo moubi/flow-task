@@ -11,13 +11,14 @@ import Swipeable from "../Swipeable/Swipeable";
 
 import "./Board.scss";
 
-let VIEWPORT_WIDTH = 0;
+export let VIEWPORT_WIDTH = 0;
 
 const stopImmediatePropagation = e => {
   e.stopImmediatePropagation();
 };
 
-const getColumnIndexAtPosition = scrollX => Math.floor(Math.abs(scrollX)/VIEWPORT_WIDTH)
+const getColumnIndexAtPosition = scrollX =>
+  Math.floor(Math.abs(scrollX) / VIEWPORT_WIDTH);
 
 const getColumnTransitionStyle = columnIndex => ({
   left: columnIndex * -VIEWPORT_WIDTH + "px",
@@ -44,7 +45,7 @@ export class Board extends Component {
 
   componentDidMount() {
     const columnsLength = Object.keys(this.props.columns).length;
-    VIEWPORT_WIDTH = this.el.offsetWidth/columnsLength;
+    VIEWPORT_WIDTH = this.el.offsetWidth / columnsLength;
   }
 
   componentWillUnmount() {
@@ -70,7 +71,9 @@ export class Board extends Component {
 
   handleSwipeLeft() {
     const { swipeStyle } = this.state;
-    const columnIndexInView = getColumnIndexAtPosition(parseInt(swipeStyle.left));
+    const columnIndexInView = getColumnIndexAtPosition(
+      parseInt(swipeStyle.left)
+    );
 
     if (columnIndexInView < 2) {
       this.setState({
@@ -84,7 +87,9 @@ export class Board extends Component {
 
   handleSwipeRight() {
     const { swipeStyle } = this.state;
-    const columnIndexInView = getColumnIndexAtPosition(Math.abs(parseInt(swipeStyle.left)));
+    const columnIndexInView = getColumnIndexAtPosition(
+      Math.abs(parseInt(swipeStyle.left))
+    );
 
     if (columnIndexInView > 0) {
       this.setState({
@@ -106,7 +111,8 @@ export class Board extends Component {
     });
     // This is needed if we have swiped to other columns previously
     // It prevents jumping to the first column when drag starts
-    window.scroll(-1 * parseInt(swipeStyle.left), 0);
+    // For some reason (-1 * parseInt(swipeStyle.left)) may equal -0
+    window.scroll(parseInt(-1 * parseInt(swipeStyle.left)), 0);
   }
 
   render() {
@@ -134,7 +140,11 @@ export class Board extends Component {
               onBeforeCapture={this.handleOnBeforeDragCapture}
             >
               {Object.values(columns).map(column => (
-                <Droppable key={column.id} droppableId={column.id} type="COLUMN">
+                <Droppable
+                  key={column.id}
+                  droppableId={column.id}
+                  type="COLUMN"
+                >
                   {(provided, snapshot) => (
                     <Column
                       id={column.id}

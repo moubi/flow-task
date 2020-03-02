@@ -54,6 +54,23 @@ export function withStore(Component, initialState, mockApi, reducer) {
   );
 }
 
+export function getInstanceWithStore(
+  reactElement,
+  initialState,
+  mockApi,
+  reducer
+) {
+  return getInstance(
+    <FakeReduxProvider
+      initialState={initialState}
+      mockApi={mockApi}
+      reducer={reducer}
+    >
+      {reactElement}
+    </FakeReduxProvider>
+  );
+}
+
 export class PropUpdater extends Component {
   constructor(props) {
     super(props);
