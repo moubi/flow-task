@@ -229,179 +229,227 @@ describe("Board", () => {
     return expect(VIEWPORT_WIDTH, "to be", 320);
   });
 
-  it("should swipe to the second column", () => {
-    let instance = null;
-    const { subject } = getInstanceWithStore(
-      <Mounter>
-        <BoardUnconnected
-          {...props}
-          ref={el => {
-            instance = el;
-          }}
-        />
-      </Mounter>
-    );
+  describe("with swiping", () => {
 
-    instance.handleSwipeLeft();
+    it("should swipe to the second column", () => {
+      let instance = null;
+      const { subject } = getInstanceWithStore(
+        <Mounter>
+          <BoardUnconnected
+            {...props}
+            ref={el => {
+              instance = el;
+            }}
+          />
+        </Mounter>
+      );
 
-    return expect(
-      subject,
-      "queried for first",
-      ".Board",
-      "to have attributes",
-      {
-        style: {
-          left: "-320px",
-          transition: "left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)"
+      instance.handleSwipeLeft();
+
+      return expect(
+        subject,
+        "queried for first",
+        ".Board",
+        "to have attributes",
+        {
+          style: {
+            left: "-320px",
+            transition: "left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)"
+          }
         }
-      }
-    );
-  });
-
-  it("should NOT swipe further right when viewing last column", () => {
-    let instance = null;
-    const { subject } = getInstanceWithStore(
-      <Mounter>
-        <BoardUnconnected
-          {...props}
-          ref={el => {
-            instance = el;
-          }}
-        />
-      </Mounter>
-    );
-
-    instance.handleSwipeLeft();
-    instance.handleSwipeLeft();
-    instance.handleSwipeLeft();
-
-    return expect(
-      subject,
-      "queried for first",
-      ".Board",
-      "to have attributes",
-      {
-        style: {
-          left: "-640px",
-          transition: "left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)"
-        }
-      }
-    );
-  });
-
-  it("should NOT swipe further left when viewing first column", () => {
-    let instance = null;
-    const { subject } = getInstanceWithStore(
-      <Mounter>
-        <BoardUnconnected
-          {...props}
-          ref={el => {
-            instance = el;
-          }}
-        />
-      </Mounter>
-    );
-
-    instance.handleSwipeRight();
-
-    return expect(
-      subject,
-      "queried for first",
-      ".Board",
-      "to have attributes",
-      {
-        style: {
-          left: "0px"
-        }
-      }
-    );
-  });
-
-  it("should swipe from third to the second column", () => {
-    let instance = null;
-    const { subject } = getInstanceWithStore(
-      <Mounter>
-        <BoardUnconnected
-          {...props}
-          ref={el => {
-            instance = el;
-          }}
-        />
-      </Mounter>
-    );
-
-    instance.handleSwipeLeft();
-    instance.handleSwipeLeft();
-    instance.handleSwipeRight();
-
-    return expect(
-      subject,
-      "queried for first",
-      ".Board",
-      "to have attributes",
-      {
-        style: {
-          left: "-320px",
-          transition: "left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)"
-        }
-      }
-    );
-  });
-
-  it.only("should swipe to first column beeing between the first and second one", () => {
-    props.tasks = {
-      "1": { text: "Buy some cakes" },
-      "2": { text: "Visit parents" }
-    };
-    props.columns = {
-      ...props.columns,
-      "0": {
-        ...props.columns["0"],
-        tasks: ["1"]
-      },
-      "1": {
-        ...props.columns["1"],
-        tasks: ["2"]
-      }
-    };
-    let instance = null;
-    const { subject } = getInstanceWithStore(
-      <Mounter>
-        <BoardUnconnected
-          {...props}
-          ref={el => {
-            instance = el;
-          }}
-        />
-      </Mounter>
-    );
-
-    Object.defineProperties(window, {
-      scrollX: {
-        get: () => -117
-      }
+      );
     });
 
-    instance.handleDragEnd({
-      source: { droppableId: "0", index: 0 },
-      destination: { droppableId: "1", index: 0 }
+    it("should NOT swipe further right when viewing last column", () => {
+      let instance = null;
+      const { subject } = getInstanceWithStore(
+        <Mounter>
+          <BoardUnconnected
+            {...props}
+            ref={el => {
+              instance = el;
+            }}
+          />
+        </Mounter>
+      );
+
+      instance.handleSwipeLeft();
+      instance.handleSwipeLeft();
+      instance.handleSwipeLeft();
+
+      return expect(
+        subject,
+        "queried for first",
+        ".Board",
+        "to have attributes",
+        {
+          style: {
+            left: "-640px",
+            transition: "left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)"
+          }
+        }
+      );
     });
 
-    instance.handleSwipeLeft();
-    instance.handleSwipeLeft();
-    instance.handleSwipeRight();
+    it("should NOT swipe further left when viewing first column", () => {
+      let instance = null;
+      const { subject } = getInstanceWithStore(
+        <Mounter>
+          <BoardUnconnected
+            {...props}
+            ref={el => {
+              instance = el;
+            }}
+          />
+        </Mounter>
+      );
 
-    return expect(
-      subject,
-      "queried for first",
-      ".Board",
-      "to have attributes",
-      {
-        style: {
-          left: "-320px",
-          transition: "left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)"
+      instance.handleSwipeRight();
+
+      return expect(
+        subject,
+        "queried for first",
+        ".Board",
+        "to have attributes",
+        {
+          style: {
+            left: "0px"
+          }
         }
-      }
-    );
+      );
+    });
+
+    it("should swipe from third to the second column", () => {
+      let instance = null;
+      const { subject } = getInstanceWithStore(
+        <Mounter>
+          <BoardUnconnected
+            {...props}
+            ref={el => {
+              instance = el;
+            }}
+          />
+        </Mounter>
+      );
+
+      instance.handleSwipeLeft();
+      instance.handleSwipeLeft();
+      instance.handleSwipeRight();
+
+      return expect(
+        subject,
+        "queried for first",
+        ".Board",
+        "to have attributes",
+        {
+          style: {
+            left: "-320px",
+            transition: "left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)"
+          }
+        }
+      );
+    });
+
+    it("should swipe to first column beeing between the first and second one", () => {
+      props.tasks = {
+        "1": { text: "Buy some cakes" },
+        "2": { text: "Visit parents" }
+      };
+      props.columns = {
+        ...props.columns,
+        "0": {
+          ...props.columns["0"],
+          tasks: ["1"]
+        },
+        "1": {
+          ...props.columns["1"],
+          tasks: ["2"]
+        }
+      };
+      let instance = null;
+      const { subject } = getInstanceWithStore(
+        <Mounter>
+          <BoardUnconnected
+            {...props}
+            ref={el => {
+              instance = el;
+            }}
+          />
+        </Mounter>
+      );
+
+      Object.defineProperty(window, "scrollX", { value: -117, writable: true });
+
+      instance.handleDragEnd({
+        source: { droppableId: "0", index: 0 },
+        destination: { droppableId: "1", index: 0 }
+      });
+
+      instance.handleSwipeRight();
+
+      return expect(
+        subject,
+        "queried for first",
+        ".Board",
+        "to have attributes",
+        {
+          style: {
+            left: "0px",
+            transition: "left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)"
+          }
+        }
+      );
+    });
+
+    it("should swipe to second column beeing between the first and second one", () => {
+      props.tasks = {
+        "1": { text: "Buy some cakes" },
+        "2": { text: "Visit parents" }
+      };
+      props.columns = {
+        ...props.columns,
+        "0": {
+          ...props.columns["0"],
+          tasks: ["1"]
+        },
+        "1": {
+          ...props.columns["1"],
+          tasks: ["2"]
+        }
+      };
+      let instance = null;
+      const { subject } = getInstanceWithStore(
+        <Mounter>
+          <BoardUnconnected
+            {...props}
+            ref={el => {
+              instance = el;
+            }}
+          />
+        </Mounter>
+      );
+
+      Object.defineProperty(window, "scrollX", { value: -117, writable: true });
+
+      instance.handleDragEnd({
+        source: { droppableId: "0", index: 0 },
+        destination: { droppableId: "1", index: 0 }
+      });
+
+      instance.handleSwipeLeft();
+
+      return expect(
+        subject,
+        "queried for first",
+        ".Board",
+        "to have attributes",
+        {
+          style: {
+            left: "-320px",
+            transition: "left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1)"
+          }
+        }
+      );
+    });
   });
 });

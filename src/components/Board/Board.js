@@ -60,7 +60,7 @@ export class Board extends Component {
 
       moveTask(draggedTaskId, destinationColumnId, destination.index);
     }
-    console.log(window.scrollX);
+
     this.setState({
       swipeStyle: {
         position: "fixed",
