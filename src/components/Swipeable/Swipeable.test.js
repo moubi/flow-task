@@ -1,4 +1,4 @@
-import expect, { getInstance } from "../../testUtils/unexpected-react";
+import expect, { Mounter, getInstance } from "../../testUtils/unexpected-react";
 import React from "react";
 import sinon from "sinon";
 
@@ -28,6 +28,33 @@ describe("Swipeable", () => {
       "to exhaustively satisfy",
       <div className="ElementToSwipe">Swipe me!</div>
     );
+  });
+
+  it("should attach event listeners on the DOM element", () => {
+    const addEventListener = sinon.stub().named("addEventListener");
+    props.children = innerRef => (
+      <div
+        className="ElementToSwipe"
+        ref={el => {
+          el.addEventListener = addEventListener;
+          innerRef(el);
+        }}
+      >
+        Swipe me!
+      </div>
+    );
+
+    getInstance(
+      <Mounter>
+        <Swipeable {...props} />
+      </Mounter>
+    );
+
+    return expect(addEventListener, "to have calls exhaustively satisfying", [
+      ["touchstart", expect.it("to be a function")],
+      ["touchmove", expect.it("to be a function")],
+      ["touchend", expect.it("to be a function")]
+    ]);
   });
 
   it("should set ref to the DOM element", () => {
