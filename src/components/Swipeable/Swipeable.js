@@ -79,7 +79,7 @@ export default class Swipeable extends PureComponent {
     } else {
       if (
         clientYDiffAbs >= minDistance &&
-        clientXDiffAbs <= maxDistance &&
+        clientYDiffAbs <= maxDistance &&
         timeDiff <= timeout
       ) {
         // Prevent other swipeables
