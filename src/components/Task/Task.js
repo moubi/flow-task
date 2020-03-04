@@ -10,7 +10,7 @@ import {
   completeTask
 } from "../../store/actions";
 
-import Swipeable from "../Swipeable/Swipeable";
+import Swipeable from "swipeable-react";
 
 import "./Task.scss";
 

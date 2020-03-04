@@ -7,7 +7,7 @@ import { moveTask } from "../../store/actions";
 
 import Column from "../Column/Column";
 import Task from "../Task/Task";
-import Swipeable from "../Swipeable/Swipeable";
+import Swipeable from "swipeable-react";
 
 import "./Board.scss";
 
