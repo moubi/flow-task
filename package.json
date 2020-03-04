@@ -12,7 +12,7 @@
     "react-redux": "^7.1.1",
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
-    "swipeable-react": "1.1.4",
+    "swipeable-react": "1.1.5",
     "uuid": "3.0.1"
   },
   "devDependencies": {
@@ -29,8 +29,7 @@
     "client": "PORT=3002 react-scripts start",
     "start": "npm run client",
     "build": "react-scripts build",
-    "test:react-scripts": "react-scripts test",
-    "test": "npm run test:react-scripts -- --transformIgnorePatterns 'node_modules/(?!(swipeable-react)/)'",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
