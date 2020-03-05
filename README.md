@@ -75,7 +75,7 @@ Contact me directly if you are interested in further project development.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+[MIT License](LICENSE)
 
 ## Acknowledgments
 
