@@ -1,5 +1,3 @@
-export { isTouch } from "./ui";
-
 export {
   getColumn,
   getColumns,
