@@ -16,7 +16,7 @@ yarn start
 
 That's it. Navigating to http://localhost:3002 will bring the board with example data.
 
-### Prior to installation
+### Prior installation
 
 The project is built with node version **10.15.1**. This is set in the `.nvmrc` file. You may need to additionally install it on your development machine using `nvm`:
 ```
