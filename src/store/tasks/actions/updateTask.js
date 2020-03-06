@@ -13,6 +13,7 @@ const updateTaskFailure = createErrorAction(UPDATE_TASK_FAILURE);
 export const updateTask = (id, data) => (dispatch, getState, api) => {
   dispatch(updateTaskRequest());
   data = {
+    id,
     ...data,
     lastModifiedDate: Date.now()
   };
