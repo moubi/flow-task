@@ -1,14 +1,22 @@
 import { updateColumn, createTask } from "../actions";
 import { getToDoColumn } from "../selectors";
 
-export const createTaskInColumn = () => (dispatch, getState, api) => {
+export const createCreateTaskInColumnAction = (
+  updateColumnAction,
+  createTaskAction
+) => () => (dispatch, getState, api) => {
   const todoColumn = getToDoColumn(getState());
 
   if (todoColumn) {
-    return dispatch(createTask()).then(taskId => {
+    return dispatch(createTaskAction()).then(taskId => {
       todoColumn.tasks = [taskId].concat(todoColumn.tasks);
-      return dispatch(updateColumn(todoColumn.id, todoColumn));
+      return dispatch(updateColumnAction(todoColumn.id, todoColumn));
     });
   }
   return false;
 };
+
+export const createTaskInColumn = createCreateTaskInColumnAction(
+  updateColumn,
+  createTask
+);

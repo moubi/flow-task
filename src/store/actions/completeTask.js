@@ -1,7 +1,11 @@
 import { updateColumn } from "../actions";
 import { getColumnByTaskId, getDoneColumn } from "../selectors";
 
-export const completeTask = taskId => (dispatch, getState, api) => {
+export const createCompleteTaskAction = updateColumnAction => taskId => (
+  dispatch,
+  getState,
+  api
+) => {
   const taskColumn = getColumnByTaskId(getState(), taskId);
   const doneColumn = getDoneColumn(getState());
 
@@ -9,9 +13,11 @@ export const completeTask = taskId => (dispatch, getState, api) => {
     taskColumn.tasks.splice(taskColumn.tasks.indexOf(taskId), 1);
     doneColumn.tasks.push(taskId);
 
-    return dispatch(updateColumn(taskColumn.id, taskColumn)).then(() =>
-      dispatch(updateColumn(doneColumn.id, doneColumn))
+    return dispatch(updateColumnAction(taskColumn.id, taskColumn)).then(() =>
+      dispatch(updateColumnAction(doneColumn.id, doneColumn))
     );
   }
   return false;
 };
+
+export const completeTask = createCompleteTaskAction(updateColumn);
