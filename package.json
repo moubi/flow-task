@@ -30,7 +30,7 @@
     "client": "PORT=3002 react-scripts start",
     "start": "npm run client",
     "build": "react-scripts build && yarn build:php",
-    "build:php": "mv build/index.html build/index.php && cp -R api build/ && cp -R db build/",
+    "build:php": "mv build/index.html build/index.php && cp -R api build/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
