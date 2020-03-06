@@ -12,7 +12,7 @@ const deleteTaskRequest = createAction(DELETE_TASK_REQUEST);
 const deleteTaskSuccess = createAction(DELETE_TASK_SUCCESS);
 const deleteTaskFailure = createErrorAction(DELETE_TASK_FAILURE);
 
-const getColumnWithRemovedTask = (state, taskId) => {
+export const getColumnWithRemovedTask = (state, taskId) => {
   const columnData = getColumnByTaskId(state, taskId);
   if (columnData) {
     columnData.tasks.splice(columnData.tasks.indexOf(taskId), 1);
