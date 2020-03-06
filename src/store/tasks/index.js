@@ -9,7 +9,7 @@ import {
 const name = "tasks";
 const initialState = {};
 
-const tasksReducer = (state = initialState, action) => {
+export const tasksReducer = (state = initialState, action) => {
   if (action.type === LOAD_TASKS_SUCCESS) {
     return {
       ...state,

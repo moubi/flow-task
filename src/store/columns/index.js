@@ -4,7 +4,7 @@ import { LOAD_COLUMNS_SUCCESS, UPDATE_COLUMN_SUCCESS } from "./constants";
 const name = "columns";
 const initialState = {};
 
-const columnsReducer = (state = initialState, action) => {
+export const columnsReducer = (state = initialState, action) => {
   if (action.type === LOAD_COLUMNS_SUCCESS) {
     return {
       ...state,
