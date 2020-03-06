@@ -32,7 +32,7 @@
     "client": "PORT=3002 react-scripts start",
     "server": "node server.js",
     "start": "concurrently 'npm run server' 'npm run client'",
-    "build": "react-scripts build && cp ./server.js ./build/ && cp -a ./db ./build",
+    "build": "react-scripts build && cp ./server.js ./build/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
