@@ -11,6 +11,9 @@
     background-color: $elevation-5-color;
     border-bottom: 2px solid transparent;
     background-clip: padding-box;
+    // transition-duration is set via javascript
+    transition-property: height, background-color, border-bottom-width;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
     overflow: hidden;
 
     &-text {
@@ -33,6 +36,20 @@
     &--dragging {
         background-color: $elevation-11-color;
         user-select: none;
+    }
+
+    &--delete,
+    &--complete {
+        height: 0px;
+        border-bottom-width: 0;
+    }
+
+    &--delete {
+        background-color: #cf6679;
+    }
+
+    &--complete {
+        background-color: #baffb8;
     }
 
     &-options {
@@ -65,7 +82,7 @@
         }
 
         &-delete {
-            background-color: #CF6679;
+            background-color: #cf6679;
             background-image: url("../../assets/bin.svg");
         }
 
