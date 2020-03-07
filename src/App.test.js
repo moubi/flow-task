@@ -9,11 +9,42 @@ describe("App", () => {
   beforeEach(() => {
     props = {
       columns: {},
-      tasks: {}
+      tasks: {},
+      tasksFetching: false
     };
   });
 
   it("should render default", () => {
+    expect(
+      <App {...props} />,
+      "when mounted",
+      "to exhaustively satisfy",
+      <div className="Loader">Loading...</div>
+    );
+  });
+
+  it("should show loading if tasks are not ready", () => {
+    props = {
+      columns: {
+        "0": {
+          id: "0",
+          name: "To do",
+          tasks: ["1", "2"]
+        },
+        "1": {
+          id: "1",
+          name: "Doing",
+          tasks: ["3"]
+        },
+        "2": {
+          id: "2",
+          name: "Done",
+          tasks: []
+        }
+      },
+      tasksFetching: true
+    };
+
     expect(
       <App {...props} />,
       "when mounted",

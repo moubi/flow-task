@@ -5,4 +5,4 @@ export {
   getDoneColumn,
   getToDoColumn
 } from "./columns";
-export { getTasks } from "./tasks";
+export { getTasks, isFetching } from "./tasks";
