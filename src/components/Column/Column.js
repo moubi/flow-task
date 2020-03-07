@@ -9,13 +9,24 @@ import "./Column.scss";
 const FIRST_COLUMN_ID = "d1ea1845-86e2-4c46-976c-8b09ba4786e5";
 
 export class Column extends Component {
+  constructor(props) {
+    super(props);
+
+    this.el = null;
+    this.handleCreateTask = this.handleCreateTask.bind(this);
+  }
+
+  handleCreateTask() {
+    this.el.scrollTop = 0;
+    this.props.createTaskInColumn();
+  }
+
   render() {
     const {
       id,
       name,
       count,
       children,
-      createTaskInColumn,
       innerRef,
       droppableProps
     } = this.props;
@@ -33,12 +44,15 @@ export class Column extends Component {
             {name} ({count})
           </h2>
           {isFirstColumn && (
-            <i className="Column-plus" onTouchEnd={createTaskInColumn} />
+            <i className="Column-plus" onTouchEnd={this.handleCreateTask} />
           )}
         </header>
         <div
           className="Column-body"
-          ref={innerRef}
+          ref={el => {
+            this.el = el;
+            innerRef(el);
+          }}
           {...droppableProps}
         >
           {children}
