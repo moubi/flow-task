@@ -40,7 +40,7 @@ describe("Task", () => {
       <Task {...props} />,
       "when mounted",
       "to exhaustively satisfy",
-      <div id="1" className="Task">
+      <div id="1" className="Task" style={{transitionDuration: "600ms"}}>
         <div className="Task-text" contentEditable />
         <div className="Task-options">
           <span className="Task-options-complete">complete</span>
@@ -180,6 +180,7 @@ describe("Task", () => {
 
   it("should delete a task", () => {
     const { subject, instance } = getInstance(<Task {...props} />);
+    const clock = sinon.useFakeTimers();
 
     // TODO: find a way to do that with simulate()
     instance.handleSwipeLeft();
@@ -189,6 +190,9 @@ describe("Task", () => {
       target: ".Task-options-delete"
     });
 
+    // Transition delay
+    clock.tick(600);
+
     return expect(
       props.deleteTaskAndUpdateColumn,
       "to have a call exhaustively satisfying",
@@ -196,7 +200,7 @@ describe("Task", () => {
     ).then(() =>
       expect(subject, "to satisfy", {
         attributes: {
-          class: expect.it("not to contain", "Task--isOptionsMenuShown")
+          class: "Task Task--delete"
         }
       })
     );
@@ -204,6 +208,7 @@ describe("Task", () => {
 
   it("should complete a task", () => {
     const { subject, instance } = getInstance(<Task {...props} />);
+    const clock = sinon.useFakeTimers();
 
     // TODO: find a way to do that with simulate()
     instance.handleSwipeLeft();
@@ -213,6 +218,9 @@ describe("Task", () => {
       target: ".Task-options-complete"
     });
 
+    // Transition delay
+    clock.tick(600);
+
     return expect(
       props.completeTask,
       "to have a call exhaustively satisfying",
@@ -220,7 +228,7 @@ describe("Task", () => {
     ).then(() =>
       expect(subject, "to satisfy", {
         attributes: {
-          class: expect.it("not to contain", "Task--isOptionsMenuShown")
+          class: "Task Task--complete"
         }
       })
     );
