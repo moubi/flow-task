@@ -20,6 +20,9 @@ Object.defineProperties(window.HTMLElement.prototype, {
     get: () => 960
   }
 });
+// Disable react-beautiful-dnd warnings since they
+// do not impract the test results
+window["__react-beautiful-dnd-disable-dev-warnings"] = true;
 
 describe("Board", () => {
   beforeEach(() => {
@@ -95,7 +98,7 @@ describe("Board", () => {
         <div
           data-rbd-draggable-context-id="1"
           data-rbd-draggable-id="1"
-          tabindex="0"
+          tabIndex="0"
           data-rbd-drag-handle-draggable-id="1"
           data-rbd-drag-handle-context-id="1"
           aria-labelledby="rbd-lift-instruction-1"
@@ -109,7 +112,7 @@ describe("Board", () => {
         <div
           data-rbd-draggable-context-id="1"
           data-rbd-draggable-id="2"
-          tabindex="0"
+          tabIndex="0"
           data-rbd-drag-handle-draggable-id="2"
           data-rbd-drag-handle-context-id="1"
           aria-labelledby="rbd-lift-instruction-1"
@@ -230,7 +233,6 @@ describe("Board", () => {
   });
 
   describe("with swiping", () => {
-
     it("should swipe to the second column", () => {
       let instance = null;
       const { subject } = getInstanceWithStore(

@@ -5,6 +5,10 @@ import { App } from "./App";
 
 let props;
 
+// Disable react-beautiful-dnd warnings since they
+// do not impract the test results
+window["__react-beautiful-dnd-disable-dev-warnings"] = true;
+
 describe("App", () => {
   beforeEach(() => {
     props = {
@@ -25,6 +29,7 @@ describe("App", () => {
 
   it("should show loading if tasks are not ready", () => {
     props = {
+      ...props,
       columns: {
         "0": {
           id: "0",
@@ -55,6 +60,7 @@ describe("App", () => {
 
   it("should render the board", () => {
     props = {
+      ...props,
       columns: {
         "0": {
           id: "0",
