@@ -2,7 +2,7 @@
 Simple yet interactive task board for your mobile browser. Written in **React** using [create-react-app](https://github.com/facebook/create-react-app).
 
 ## Support
-Though, it implements several interesting ideas and UI effects, the board was initially intended to serve personal goals and developed for _**latest iOS Safari**_ (iPhone SE).
+Though, it implements several interesting ideas and UI effects, the board was initially intended to serve personal goals and developed for _**latest iOS Safari**_.
 
 ## Getting started
 Go to your project folder and
