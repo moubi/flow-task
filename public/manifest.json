@@ -1,6 +1,6 @@
 {
-  "short_name": "Todo board",
-  "name": "Simple todo board for your mobile browser",
+  "short_name": "FlowTask",
+  "name": "Simple yet interactive task board for your mobile browser",
   "icons": [
     {
       "src": "favicon.ico",

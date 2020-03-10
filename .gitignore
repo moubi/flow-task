@@ -65,9 +65,6 @@ typings/
 # production
 /build
 
-# public
-/public
-
 # VS code config
 .vscode
 
