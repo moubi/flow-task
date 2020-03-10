@@ -2,7 +2,6 @@
   "name": "flow-task",
   "version": "1.0.0",
   "homepage": ".",
-  "private": true,
   "dependencies": {
     "lodash": "^4.17.15",
     "node-sass": "^4.12.0",

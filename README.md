@@ -58,7 +58,7 @@ Contact me directly if you are interested in further project development.
 [Miroslav Nikolov](https://github.com/moubi)
 
 ## License
-[MIT License](LICENSE)
+[MIT](LICENSE)
 
 ## Acknowledgments
 * [swipeable-react](https://github.com/moubi/swipeable-react) - catching swipe interactions
