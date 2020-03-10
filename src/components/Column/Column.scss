@@ -6,14 +6,9 @@
 
     flex-grow: 1;
     flex-basis: 0;
+    flex-shrink: 0;
     box-sizing: border-box;
     padding: 0 2px;
-
-    @media (max-width: 1023px) {
-        flex-shrink: 0;
-        // iPhone 5SE screen width
-        flex-basis: 320px;
-    }
 
     &-body {
         // TODO: find a better way to determine height (flex?)
