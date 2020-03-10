@@ -7,7 +7,7 @@ import App from "./App";
 
 import "./index.scss";
 
-window.todo_board = store;
+window.flow_task = store;
 
 store.dispatch(bootstrap()).catch(() => {
   // ignore

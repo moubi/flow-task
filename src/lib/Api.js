@@ -1,4 +1,4 @@
-const appName = "Todo board";
+const appName = "FlowTask";
 const columns = {
   "d1ea1845-86e2-4c46-976c-8b09ba4786e5": {
     id: "d1ea1845-86e2-4c46-976c-8b09ba4786e5",
