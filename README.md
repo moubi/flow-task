@@ -1,6 +1,8 @@
 # FlowTask
 Simple yet interactive task board for your mobile browser. Written in **React** using [create-react-app](https://github.com/facebook/create-react-app).
 
+[![moubi](https://img.shields.io/circleci/build/gh/moubi/flow-task?label=circleci&style=flat-square)](https://circleci.com/gh/moubi/flow-task) [![moubi](https://img.shields.io/github/license/moubi/flow-task?style=flat-square)](LICENSE)
+
 ## Support
 Though, it implements several interesting ideas and UI effects, the board was initially intended to serve personal goals and developed for _**latest iOS Safari**_.
 
