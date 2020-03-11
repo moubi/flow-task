@@ -1,10 +1,16 @@
-# FlowTask
-Simple yet interactive task board for your mobile browser. Written in **React** using [create-react-app](https://github.com/facebook/create-react-app).
+<div align="center">
+<h1>FlowTask</h1>
+<p>
+  Simple yet interactive task board for your mobile browser. Written in <strong>React</strong> using <a target="_blank" href="https://github.com/facebook/create-react-app">create-react-app</a>.
+</p>
 
 [![moubi](https://img.shields.io/circleci/build/gh/moubi/flow-task?label=circleci&style=flat-square)](https://circleci.com/gh/moubi/flow-task) [![moubi](https://img.shields.io/github/license/moubi/flow-task?style=flat-square)](LICENSE)
 
-## Support
-Though, it implements several interesting ideas and UI effects, the board was initially intended to serve personal goals and developed for _**latest iOS Safari**_.
+  <img alt="A preview of the FlowTask app" src="flowtask_preview.gif" width="338" height="480" />
+  <p>
+    <a target="_blank" href="https://flowtask.webup.org/demo">Play with the Live demo</a>
+  </p>
+</div>
 
 ## Getting started
 Go to your project folder and
@@ -51,6 +57,9 @@ yarn build
 All the production files are then stored in the `build/` folder.
 
 [Node](https://github.com/moubi/flow-task/tree/feature/node-server) and [php](https://github.com/moubi/flow-task/tree/feature/php-server) backends have their own build process.
+
+## Support
+Though, it implements several interesting ideas and UI effects, the board was initially intended to serve personal goals and developed for _**latest iOS Safari**_.
 
 ## Contributing
 Android support, bug fixes, new features or even a desktop version - your help is welcome.
