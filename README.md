@@ -8,7 +8,7 @@
 
   <img alt="A preview of the FlowTask app" src="flowtask_preview.gif" width="338" height="480" />
   <p>
-    <a target="_blank" href="https://flowtask.webup.org/demo">Play with the Live demo</a>
+    <a target="_blank" href="https://flowtask.webup.org/demo">We have live demo too!</a>
   </p>
 </div>
 
