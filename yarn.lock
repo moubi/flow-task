@@ -10574,7 +10574,7 @@ unexpected-bluebird@2.9.34-longstack2:
   resolved "https://registry.yarnpkg.com/unexpected-bluebird/-/unexpected-bluebird-2.9.34-longstack2.tgz#49acac753b0556ded6025210ee96182307d2b2c9"
   integrity sha1-SaysdTsFVt7WAlIQ7pYYIwfSssk=
 
-unexpected-dom@^4.11.1:
+unexpected-dom@^4.17.0:
   version "4.17.0"
   resolved "https://registry.yarnpkg.com/unexpected-dom/-/unexpected-dom-4.17.0.tgz#afaa1a377334d79149b037dc85ed4e0ae255bd47"
   integrity sha512-k9T5nDPxZz+cXb9mB+Gg449RqOmqCUN+lPVB4S/f8fmdjel1b9x4h+zn2909b0RmlDMdfeKXF0aUWqiFLC1OEg==
@@ -10582,7 +10582,7 @@ unexpected-dom@^4.11.1:
     extend "^3.0.1"
     magicpen-prism "^4.0.0"
 
-unexpected-reaction@^2.6.0:
+unexpected-reaction@^2.16.0:
   version "2.16.0"
   resolved "https://registry.yarnpkg.com/unexpected-reaction/-/unexpected-reaction-2.16.0.tgz#15a3c1c84ba016b0b203aa243c88fd0187b462e3"
   integrity sha512-Xmm1gk0xRhbQnhdH3k2mV2kn3L24zr7DEw6d/tdks59rzt046JehPflk7BGCfcPBfTfige4sgYtyuX6Iq6dc8Q==
@@ -10594,7 +10594,7 @@ unexpected-sinon@^10.11.2:
   resolved "https://registry.yarnpkg.com/unexpected-sinon/-/unexpected-sinon-10.11.2.tgz#43005d659068c393964397168271597757d62176"
   integrity sha512-N2KIKPweTVs6AK8cDKQTUwu0fGWyGt+cI/UJZ/eltAyOKgsHL9eILttdGfpZjI/iMYcHcbtUwIlXoHfmh6EcBw==
 
-unexpected@^11.0.1:
+unexpected@^11.13.0:
   version "11.13.0"
   resolved "https://registry.yarnpkg.com/unexpected/-/unexpected-11.13.0.tgz#c8da1b86de493d6c44e70a637b33bbfad586ab6a"
   integrity sha512-nSVZN1KsyhmDNctgHwQLmp/d1h6eNqv1DQqqqonnGMWhyr0dVbVyYE6meTDPjmqPWQbiTEUNNiBG5WBLtrffYg==
