@@ -101,7 +101,6 @@ describe("Board", () => {
           tabIndex="0"
           data-rbd-drag-handle-draggable-id="1"
           data-rbd-drag-handle-context-id="1"
-          aria-labelledby="rbd-lift-instruction-1"
           draggable="false"
         >
           <div id="1" className="Task">
@@ -115,7 +114,6 @@ describe("Board", () => {
           tabIndex="0"
           data-rbd-drag-handle-draggable-id="2"
           data-rbd-drag-handle-context-id="1"
-          aria-labelledby="rbd-lift-instruction-1"
           draggable="false"
         >
           <div id="2" className="Task">

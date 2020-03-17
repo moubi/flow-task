@@ -1,5 +1,5 @@
 import { createAction, createErrorAction } from "../../utils";
-import uuid from "uuid/v4";
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   CREATE_TASK_REQUEST,
@@ -13,7 +13,7 @@ const createTaskFailure = createErrorAction(CREATE_TASK_FAILURE);
 
 export const createTask = () => (dispatch, getState, api) => {
   dispatch(createTaskRequest());
-  const id = uuid();
+  const id = uuidv4();
   const newTask = {
     id,
     text: "",
