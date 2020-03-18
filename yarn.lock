@@ -10253,10 +10253,10 @@ svgo@^1.0.0, svgo@^1.2.2:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-swipeable-react@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/swipeable-react/-/swipeable-react-1.2.0.tgz#0d90244b8259e0cf131cfad01c56fc3ba41adf12"
-  integrity sha512-XAjMA521fdQgH4CrHhCzxkB5hJbkidrwFBKfEU2JU3ItihgpAXs2do4IbAGMwcEnDahGNZGNyQL8+c5uruE2Cg==
+swipeable-react@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/swipeable-react/-/swipeable-react-1.2.1.tgz#8be1a3041deffe4c7b6759984055d95c44fd1194"
+  integrity sha512-X9bjEEHTGHpihkdogXPnUjqSkfvyxdhMg1mSvZ1quTLjyHzP61o5R0fC5NATrC1zSsqT8Vwox8mHZwZdI0hzmw==
   dependencies:
     react "16.9.0"
     react-dom "16.9.0"
