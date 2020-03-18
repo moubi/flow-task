@@ -39,7 +39,7 @@ describe("Column", () => {
   });
 
   it("should render first column", () => {
-    props.id = "d1ea1845-86e2-4c46-976c-8b09ba4786e5";
+    props.name = "To Do";
 
     return expect(
       <Column {...props} />,
@@ -80,16 +80,16 @@ describe("Column", () => {
   });
 
   it("should create task in column", () => {
-    props.id = "d1ea1845-86e2-4c46-976c-8b09ba4786e5";
+    props.name = "To Do";
     const { subject, instance } = getInstance(<Column {...props} />);
 
     simulate(subject, {
       type: "touchEnd",
       target: ".Column-plus"
     });
-    return expect(props.createTaskInColumn, "was called").then(() => (
+    return expect(props.createTaskInColumn, "was called").then(() =>
       expect(instance.el.scrollTop, "to be", 0)
-    ))
+    );
   });
 
   it("should set the ref", () => {

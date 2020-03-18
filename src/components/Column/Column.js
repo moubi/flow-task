@@ -6,7 +6,7 @@ import { createTaskInColumn } from "../../store/actions";
 import "./Column.scss";
 
 // TODO: Use selector instead
-const FIRST_COLUMN_ID = "d1ea1845-86e2-4c46-976c-8b09ba4786e5";
+const FIRST_COLUMN_NAME = "To do";
 
 export class Column extends Component {
   constructor(props) {
@@ -22,23 +22,11 @@ export class Column extends Component {
   }
 
   render() {
-    const {
-      id,
-      name,
-      count,
-      children,
-      innerRef,
-      droppableProps
-    } = this.props;
-
-    const isFirstColumn = id === FIRST_COLUMN_ID;
+    const { id, name, count, children, innerRef, droppableProps } = this.props;
+    const isFirstColumn = name === FIRST_COLUMN_NAME;
 
     return (
-      <div
-        id={id}
-        name={name}
-        className="Column"
-      >
+      <div id={id} name={name} className="Column">
         <header>
           <h2>
             {name} ({count})
