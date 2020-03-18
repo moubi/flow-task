@@ -39,7 +39,7 @@ describe("Column", () => {
   });
 
   it("should render first column", () => {
-    props.name = "To Do";
+    props.name = "To do";
 
     return expect(
       <Column {...props} />,
@@ -80,7 +80,7 @@ describe("Column", () => {
   });
 
   it("should create task in column", () => {
-    props.name = "To Do";
+    props.name = "To do";
     const { subject, instance } = getInstance(<Column {...props} />);
 
     simulate(subject, {
