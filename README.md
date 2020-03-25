@@ -61,12 +61,17 @@ All the production files are then stored in the `build/` folder.
 ## Support
 Though, it implements several interesting ideas and UI effects, the board was initially intended to serve personal goals and developed for _**latest iOS Safari**_.
 
-## Contributing
-Android support, bug fixes, new features or even a desktop version - your help is welcome.
-Contact me directly if you are interested in further project development.
+## Contributing (aka roadmap)
+ - Android support - there shouldn't be much missing
+ - DB implementation (perhaps MongoDB?)
+ - Keep it simple, quick, but interactive (challenge: having usable, but not sassy UI)
+ - Avoid being Trello, Jira or Asana board alternative
+
+Good starting point is the [repo's project](https://github.com/moubi/flow-task/projects/1).
+Open an issue if you need (there is no strict rule or a template) or email me directly. Your contribution is 100% welcome.
 
 ## Authors
-[Miroslav Nikolov](https://github.com/moubi)
+[Miroslav Nikolov](https://webup.org)
 
 ## License
 [MIT](LICENSE)
