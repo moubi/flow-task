@@ -1,7 +1,7 @@
 <div align="center">
 <h1>FlowTask</h1>
 <p>
-  Simple yet interactive task board for your mobile browser. Written in <strong>React</strong> using <a target="_blank" href="https://github.com/facebook/create-react-app">create-react-app</a>.
+  <strong>Simple yet interactive task board for your mobile browser.</strong> Written in <strong>React</strong> with <a target="_blank" href="https://github.com/facebook/create-react-app">create-react-app</a>.
 </p>
 
 [![moubi](https://img.shields.io/circleci/build/gh/moubi/flow-task?label=circleci&style=flat-square)](https://circleci.com/gh/moubi/flow-task) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/moubi/flow-task.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/moubi/flow-task/context:javascript) [![moubi](https://img.shields.io/github/license/moubi/flow-task?style=flat-square)](LICENSE)
