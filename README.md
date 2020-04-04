@@ -38,6 +38,30 @@ nvm use
 
 Check corresponding READMEs for more info.
 
+## Words on structure
+```bash
+.
+├── App.js
+├── App.test.js
+├── assets
+├── components
+├── index.js
+├── index.scss
+├── lib
+├── store
+└── testUtils
+```
+
+**Some interesting paths:**
+
+`|-- components` - all React app components (Board, Column, Task and Loader).
+
+`|-- store` - actions and reducers split between the columns and tasks modules.
+
+`|-- testUtils` - testing utilities for simulating events, working with store and getting component instalnces.
+
+`|-- lib` - contains Api.js to handle localStorage queries for data.
+
 ## Tests
 Trigger the test suite by
 
