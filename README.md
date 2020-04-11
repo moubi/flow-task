@@ -91,7 +91,7 @@ Though, it implements several interesting ideas and UI effects, the board was in
  - Keep it simple, quick, but interactive (challenge: having usable, but not sassy UI)
  - Avoid being Trello, Jira or Asana board alternative
 
-Good starting point is the [repo's project](https://github.com/moubi/flow-task/projects/1).
+Good starting point is the [project board](https://github.com/moubi/flow-task/projects/1).
 Open an issue if you need (there is no strict rule or a template) or email me directly. Your contribution is 100% welcome.
 
 ## Authors
